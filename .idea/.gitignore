@@ -1,0 +1,9 @@
+# Default ignored files
+/workspace.xml
+
+# Ignored by grupp 11
+/usage.statistics.xml
+/tasks.xml
+.idea/modules.xml
+.idea/libraries
+*.iml
