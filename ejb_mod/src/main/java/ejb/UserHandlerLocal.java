@@ -9,12 +9,10 @@ import javax.ejb.Local;
 @Local
 public interface UserHandlerLocal {
 
-    void populate();
+    void addNewUser(String userName, String password);
 
-    User check(String usernameInput, String passwordInput);
+    User login(String userName, String password);
 
-    String register(String usernameInput, String passwordInput);
-
-
+    void populateDBWithUsers();
 
 }

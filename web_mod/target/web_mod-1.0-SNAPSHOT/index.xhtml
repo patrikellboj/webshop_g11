@@ -14,19 +14,19 @@
 
     <h:form>
         <h:outputLabel styleClass="username-label" value="User:"/>
-        <h:inputText styleClass="username-value" value="#{controller.usernameInput}"/>
+        <h:inputText styleClass="username-value" value="#{loginAndRegisterController.usernameInput}"/>
         <br/>
 
         <h:outputLabel styleClass="password-label" value="Password:"/>
 <!--        redisplay="true" måste användas om en styleklass används-->
-        <h:inputSecret styleClass="password-value" redisplay="true" value="#{controller.passwordInput}"/>
+        <h:inputSecret styleClass="password-value" redisplay="true" value="#{loginAndRegisterController.passwordInput}"/>
         <br/>
 
-        <h:commandButton styleClass="login-register-btn" action="#{controller.submit()}" value="Submit"/>
+        <h:commandButton styleClass="login-register-btn" action="#{loginAndRegisterController.submit()}" value="Submit"/>
         <h:commandButton styleClass="login-register-btn" action="register" value="Register"/>
         <br/>
 
-        <h:outputLabel styleClass="login-message" value="#{controller.message}"/>
+        <h:outputLabel styleClass="login-message" value="#{loginAndRegisterController.message}"/>
         <br/>
     </h:form>
 </h:body>

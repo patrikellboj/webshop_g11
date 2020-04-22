@@ -27,13 +27,13 @@
         <h:outputLabel for="username">
             <h:outputText value="Username: "/>
         </h:outputLabel>
-        <h:inputText id="username" value="#{controller.usernameInput}"/>
+        <h:inputText id="username" value="#{loginAndRegisterController.usernameInput}"/>
         <br/>
 
         <h:outputLabel for="password">
             <h:outputText value="Password: "/>
         </h:outputLabel>
-        <h:inputSecret id="password" redisplay="true" value="#{controller.passwordInput}"/>
+        <h:inputSecret id="password" redisplay="true" value="#{loginAndRegisterController.passwordInput}"/>
         <br/>
 
         <h:outputLabel for="email">
@@ -43,7 +43,7 @@
         <h:inputText id="email" value="" disabled="true"/>
         <br/>
 
-        <h:commandButton action="#{controller.registerNewCustomer()}" value="Register"/>
+        <h:commandButton action="#{loginAndRegisterController.registerNewCustomer()}" value="Register"/>
 
     </h:form>
 </h:body>

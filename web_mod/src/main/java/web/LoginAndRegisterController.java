@@ -1,5 +1,6 @@
 package web;
 
+import ejb.Role;
 import ejb.User;
 import ejb.UserHandlerLocal;
 
@@ -8,20 +9,16 @@ import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 
-@Named(value = "controller")
+@Named(value = "loginAndRegisterController")
 @SessionScoped
-
-public class Controller implements Serializable {
-
+public class LoginAndRegisterController implements Serializable {
 
     @EJB
-    //TestBeanLocal testBeanLocal;
     UserHandlerLocal userHandlerLocal;
     private String usernameInput;
     private String passwordInput;
     private String message;
     private User currentUser;
-    private User user = new User();
 //-----------------------------------------------
 
     public String getUsernameInput() {
@@ -57,21 +54,25 @@ public class Controller implements Serializable {
     }
 
     public String submit () {
-       this.currentUser = userHandlerLocal.check(usernameInput,passwordInput);
+       this.currentUser = userHandlerLocal.login(usernameInput,passwordInput);
        if (currentUser != null) {
-           //if (currentUser.getRole() == Role.ADMIN) {
-           //    return "admin";
-           //} else {
-
+           if (currentUser.getRole() == Role.ADMIN) {
+               return "admin";
+           } else {
                return "customer";
-          //}
+          }
        }
-        this.message= "Not Found";
+        this.message= "User not found";
         return "";
     }
 
+//    public String registerNewCustomer() {
+//        this.message= userHandlerLocal.register(usernameInput, passwordInput);
+//        return "index";
+//    }
+
     public String registerNewCustomer() {
-        this.message= userHandlerLocal.register(usernameInput, passwordInput);
+        userHandlerLocal.addNewUser(usernameInput, passwordInput);
         return "index";
     }
 

@@ -10,7 +10,6 @@ import static javax.persistence.CascadeType.PERSIST;
 
 @Entity
 @Table(name = "USER")
-
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -18,7 +17,9 @@ public class User implements Serializable {
     @Basic(optional=false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+    @Column(name = "user_name", nullable = false) // Får inte vara null
     private String username;
+    @Column(name = "password", nullable = false) // Får inte vara null
     private String password;
     private Role role;
     //private List<User> users = new ArrayList<>();
@@ -30,8 +31,8 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String username, String password, Role role) {
-        this.username = username;
+    public User(String userName, String password, Role role) {
+        this.username = userName;
         this.password = password;
         this.role = role;
 
