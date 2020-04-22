@@ -21,6 +21,7 @@ public class User implements Serializable {
     private String username;
     private String password;
     private Role role;
+    //private List<User> users = new ArrayList<>();
     @OneToMany(cascade=PERSIST, mappedBy="user")
     private List<Orders> ordersList =new ArrayList();
 
@@ -71,6 +72,14 @@ public class User implements Serializable {
     }
 
  /*    //Logiken
+
+
+       public void populate(){
+        users.add(new User("kund","kund123", Role.CUSTOMER));
+        users.add(new User("premium","premium123", Role.PREMIUM_CUSTOMER));
+        users.add(new User("admin","admin123", Role.ADMIN));
+    }
+
 
     public User check(String usernameInput, String passwordInput) {
         for (User user : users) {
