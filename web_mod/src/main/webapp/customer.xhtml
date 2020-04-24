@@ -13,9 +13,31 @@
     <h:outputStylesheet library="css" name="style.css" />
     <h1>KUNDSIDA</h1>
     <br/>
-    <h:graphicImage styleClass="alexander" library="Images" name="alexander.jpg"/>
-    <br/>
+    <!--<h:graphicImage styleClass="alexander" library="Images" name="alexander.jpg"/> -->
     <h:form>
+
+        <h:outputLabel styleClass="product-title" value="#{customerController.getProd1().getName()}"/>
+        <br/> <br/>
+        <h:outputLabel styleClass="product-description" value="#{customerController.getProd1().getDescription()}"/>
+        <br/> <br/>
+        <h:commandButton value="Add"/>
+        <br/> <br/> <br/>
+
+        <h:outputLabel styleClass="product-title" value="#{customerController.getProd2().getName()}"/>
+        <br/> <br/>
+        <h:outputLabel styleClass="product-description" value="#{customerController.getProd2().getDescription()}"/>
+        <br/> <br/>
+        <h:commandButton value="Add"/>
+        <br/> <br/> <br/>
+
+        <h:outputLabel styleClass="product-title" value="#{customerController.getProd3().getName()}"/>
+        <br/> <br/>
+        <h:outputLabel styleClass="product-description" value="#{customerController.getProd3().getDescription()}"/>
+        <br/> <br/>
+        <h:commandButton value="Add"/>
+        <br/> <br/> <br/> <br/>
+
+
         <h:outputLabel value="#{loginAndRegisterController.currentUser.getUsername()}"/>
         <br/>
         <h:outputLabel value="#{loginAndRegisterController.currentUser.getPassword()}"/>

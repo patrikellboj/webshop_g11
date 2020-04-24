@@ -13,9 +13,10 @@ public class UserHandler implements UserHandlerLocal {
     private EntityManager em;
 
     @Override
-    public void addNewUser(String userName, String password) {
+    public String addNewUser(String userName, String password) {
         User user = new User(userName, password, Role.CUSTOMER);
         persist(user);
+        return "User added successfully";
     }
 
     public void persist(Object object) {
@@ -25,6 +26,7 @@ public class UserHandler implements UserHandlerLocal {
     @Override
     public User login(String userName, String password) {
         populateDBWithUsers();
+        populateDBWithProducts();
         User user = new User();
 
         try {
@@ -61,6 +63,20 @@ public class UserHandler implements UserHandlerLocal {
             User user3 = new User("admin", "admin123", Role.ADMIN);
             persist(user3);
         }
+    }
+
+
+        public void populateDBWithProducts() {
+            Query query = em.createQuery("SELECT p FROM Product p");
+            int sizeOfProductsTable = query.getResultList().size();
+            if (sizeOfProductsTable < 3) {
+                Product prod1 = new Product("Dillchips", "Smakfulla dillchips från OLW!", 20.0D);
+                persist(prod1);
+                Product prod2 = new Product("Sourcream", "Delikata sorucreamchips från OLW!", 20.0D);
+                persist(prod2);
+                Product prod3 = new Product("Grillchips", "Krispiga grillchips från OLW!", 20.0D);
+                persist(prod3);
+            }
     }
 
 

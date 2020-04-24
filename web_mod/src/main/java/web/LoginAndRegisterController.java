@@ -53,14 +53,13 @@ public class LoginAndRegisterController implements Serializable {
         this.currentUser = currentUser;
     }
 
-    public String submit () {
+    public String login() {
        this.currentUser = userHandlerLocal.login(usernameInput,passwordInput);
        if (currentUser != null) {
            if (currentUser.getRole() == Role.ADMIN) {
                return "admin";
            } else {
-               //Testar bara products sidan :)
-               return "products";
+               return "customer";
           }
        }
         this.message= "User not found";
@@ -73,7 +72,7 @@ public class LoginAndRegisterController implements Serializable {
 //    }
 
     public String registerNewCustomer() {
-        userHandlerLocal.addNewUser(usernameInput, passwordInput);
+        this.message = userHandlerLocal.addNewUser(usernameInput, passwordInput);
         return "index";
     }
 

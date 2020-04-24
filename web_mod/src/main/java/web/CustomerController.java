@@ -8,9 +8,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Named (value = "productController")
+@Named (value = "customerController")
 @SessionScoped
-public class ProductController implements Serializable {
+public class CustomerController implements Serializable {
 
     private List<Product> products = new ArrayList<>();
 
@@ -18,7 +18,7 @@ public class ProductController implements Serializable {
     private Product prod2 = new Product("Sourcream", "Delikata sorucreamchips från OLW!", 20.0D);
     private Product prod3 = new Product("Grillchips", "Krispiga grillchips från OLW!", 20.0D);
 
-    public ProductController() {
+    public CustomerController() {
         products.add(prod1);
         products.add(prod2);
         products.add(prod3);

@@ -22,10 +22,7 @@ public class Orders implements Serializable {
 
     @ManyToOne(cascade=PERSIST)
     private User user;
-    @ManyToMany(cascade=PERSIST)
-    @JoinTable(name = "orders_product",
-            joinColumns = @JoinColumn(name = "orders_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @ManyToMany(cascade=PERSIST,mappedBy="ordersList")
     private List<Product> productList;
     private String text;
 

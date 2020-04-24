@@ -19,11 +19,15 @@ public class Product implements Serializable {
     private String name;
     private String description;
     private double price;
-    @ManyToMany(cascade=PERSIST,mappedBy="productList")
+    @ManyToMany(cascade=PERSIST)
+    @JoinTable(name = "orders_product",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "orders_id"))
     private List<Orders> ordersList;
 //-----------------------------------------
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(String name, String description, double price) {
         this.name = name;
