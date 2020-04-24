@@ -59,7 +59,8 @@ public class LoginAndRegisterController implements Serializable {
            if (currentUser.getRole() == Role.ADMIN) {
                return "admin";
            } else {
-               return "customer";
+               //Testar bara products sidan :)
+               return "products";
           }
        }
         this.message= "User not found";

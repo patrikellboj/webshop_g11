@@ -23,8 +23,7 @@ public class Product implements Serializable {
     private List<Orders> ordersList;
 //-----------------------------------------
 
-    public Product() {
-    }
+    public Product() {}
 
     public Product(String name, String description, double price) {
         this.name = name;

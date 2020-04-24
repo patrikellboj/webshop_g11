@@ -21,4 +21,13 @@
     background-color: teal;
 }
 
+.product-title{
+    color: black;
+    font-size: 20px;
+}
+
+.product-description {
+    color: black;
+    background: antiquewhite;
+}
 
