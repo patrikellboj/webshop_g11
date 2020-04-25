@@ -24,7 +24,7 @@ public class CustomerController implements Serializable {
 
     // vi har inte längre en list med products
     // listan har blivit userHandlerLocal.getProductsfromDb(). Detta är redan en list<Products>
-    // om vi kommer hatt behöva en list  product här
+    // om vi kommer att behöva en list  product här
     // antingen vi kan prova att fånga userHandlerLocal.getProductsfromDb() i en instansvariabel
     // eller kan vi loopa genom userHandlerLocal.getProductsfromDb() ocj skapa en ny lista
     // men vi kan också göra  alla sökningar direkt i DB (genom Ejb_mod). Jag tror att det är bättre.
