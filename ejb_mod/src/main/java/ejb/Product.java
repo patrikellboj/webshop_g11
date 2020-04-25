@@ -67,4 +67,9 @@ public class Product implements Serializable {
     public void setOrdersList(List<Orders> ordersList) {
         this.ordersList = ordersList;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" + "name=" + name + ", description=" + description + ", pris=" + price + "}";
+    }
 }

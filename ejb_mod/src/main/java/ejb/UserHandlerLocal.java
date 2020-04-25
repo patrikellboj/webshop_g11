@@ -1,6 +1,7 @@
 package ejb;
 
 import javax.ejb.Local;
+import java.util.List;
 
 /**
  *
@@ -16,5 +17,6 @@ public interface UserHandlerLocal {
     void populateDBWithUsers();
 
     void populateDBWithProducts();
+
 
 }

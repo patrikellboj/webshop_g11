@@ -1,7 +1,10 @@
 package web;
 
+import ejb.CustomerHandlerLocal;
 import ejb.Product;
+import ejb.UserHandlerLocal;
 
+import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
@@ -12,31 +15,24 @@ import java.util.List;
 @SessionScoped
 public class CustomerController implements Serializable {
 
-    private List<Product> products = new ArrayList<>();
+    @EJB
+    CustomerHandlerLocal customerHandlerLocal;
 
-    private Product prod1 = new Product("Dillchips", "Smakfulla dillchips från OLW!", 20.0D);
-    private Product prod2 = new Product("Sourcream", "Delikata sorucreamchips från OLW!", 20.0D);
-    private Product prod3 = new Product("Grillchips", "Krispiga grillchips från OLW!", 20.0D);
+    public Product getProd1() { return customerHandlerLocal.getProductsfromDb().get(0);}
+    public Product getProd2() { return customerHandlerLocal.getProductsfromDb().get(1);}
+    public Product getProd3()  { return customerHandlerLocal.getProductsfromDb().get(2);}
 
-    public CustomerController() {
-        products.add(prod1);
-        products.add(prod2);
-        products.add(prod3);
-    }
+    // vi har inte längre en list med products
+    // listan har blivit userHandlerLocal.getProductsfromDb(). Detta är redan en list<Products>
+    // om vi kommer hatt behöva en list  product här
+    // antingen vi kan prova att fånga userHandlerLocal.getProductsfromDb() i en instansvariabel
+    // eller kan vi loopa genom userHandlerLocal.getProductsfromDb() ocj skapa en ny lista
+    // men vi kan också göra  alla sökningar direkt i DB (genom Ejb_mod). Jag tror att det är bättre.
 
-    public Product getProd1() {
-        return prod1;
-    }
 
-    public Product getProd2() {
-        return prod2;
-    }
 
-    public Product getProd3() {
-        return prod3;
-    }
 
-    public Product findProduct(String name) {
+   /* public Product findProduct(String name) {
         Product temp = null;
         for(int i = 0; i < products.size(); i++) {
             if(products.get(i).getName() == name) {
@@ -44,5 +40,5 @@ public class CustomerController implements Serializable {
             }
         }
         return temp;
-    }
+    }*/
 }
