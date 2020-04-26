@@ -20,7 +20,6 @@ public class CustomerHandler implements CustomerHandlerLocal {
     public void persist(Object object) {
         em.persist(object);
     }
-    
 
     public List<Product> getProductsfromDb() {
         List<Product> products = new ArrayList<>();
@@ -32,8 +31,4 @@ public class CustomerHandler implements CustomerHandlerLocal {
         }
         return products;
     }
-
-
-
-
 }

@@ -8,37 +8,84 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+
 
 @Named (value = "customerController")
 @SessionScoped
 public class CustomerController implements Serializable {
 
+    private String searchInput = "";
+    private String foundProductName = "";
+    private String foundProductDesc = "";
+    private boolean renderResult = false;
+
     @EJB
     CustomerHandlerLocal customerHandlerLocal;
 
-    public Product getProd1() { return customerHandlerLocal.getProductsfromDb().get(0);}
-    public Product getProd2() { return customerHandlerLocal.getProductsfromDb().get(1);}
-    public Product getProd3()  { return customerHandlerLocal.getProductsfromDb().get(2);}
+    public Product getProd1() {
+        return customerHandlerLocal.getProductsfromDb().get(0);
+    }
 
-    // vi har inte längre en list med products
-    // listan har blivit userHandlerLocal.getProductsfromDb(). Detta är redan en list<Products>
-    // om vi kommer att behöva en list  product här
-    // antingen vi kan prova att fånga userHandlerLocal.getProductsfromDb() i en instansvariabel
-    // eller kan vi loopa genom userHandlerLocal.getProductsfromDb() ocj skapa en ny lista
-    // men vi kan också göra  alla sökningar direkt i DB (genom Ejb_mod). Jag tror att det är bättre.
+    public Product getProd2() {
+        return customerHandlerLocal.getProductsfromDb().get(1);
+    }
 
+    public Product getProd3()  {
+        return customerHandlerLocal.getProductsfromDb().get(2);
+    }
 
+    //Reference till produktlistan
+    public List <Product> getProductsList(){
+        return customerHandlerLocal.getProductsfromDb();
+    }
 
-
-   /* public Product findProduct(String name) {
+    public void findProduct(String name) {
         Product temp = null;
-        for(int i = 0; i < products.size(); i++) {
-            if(products.get(i).getName() == name) {
-                temp = products.get(i);
+        for(int i = 0; i < getProductsList().size(); i++) {
+            if(getProductsList().get(i).getName().equals(name)) {
+                temp = getProductsList().get(i);
+                foundProductName = temp.getName();
+                foundProductDesc = temp.getDescription();
+                renderResult = true;
+                break;
+            }
+            else {
+                foundProductName = "Not found!";
+                renderResult = false;
             }
         }
-        return temp;
-    }*/
+    }
+
+    public String getSearchInput() {
+        return searchInput;
+    }
+
+    public void setSearchInput(String searchInput) {
+        this.searchInput = searchInput;
+    }
+
+    public String getFoundProductName() {
+        return foundProductName;
+    }
+
+    public void setFoundProductName(String foundProductName) {
+        this.foundProductName = foundProductName;
+    }
+
+    public String getFoundProductDesc() {
+        return foundProductDesc;
+    }
+
+    public void setFoundProductDesc(String foundProductDesc) {
+        this.foundProductDesc = foundProductDesc;
+    }
+
+    public boolean getRenderResult() {
+        return renderResult;
+    }
+
+    public void setRenderResult(boolean renderResult) {
+        this.renderResult = renderResult;
+    }
 }

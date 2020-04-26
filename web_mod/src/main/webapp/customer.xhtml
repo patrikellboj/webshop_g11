@@ -12,9 +12,21 @@
 <h:body>
     <h:outputStylesheet library="css" name="style.css" />
     <h1>KUNDSIDA</h1>
-    <br/>
     <!--<h:graphicImage styleClass="alexander" library="Images" name="alexander.jpg"/> -->
     <h:form>
+
+        <h:outputText value="Sök vara: "/>
+        <h:inputText value = "#{customerController.searchInput}"/>
+        <h:commandButton value = "Sök" action = "#{customerController.findProduct(customerController.searchInput)}"/>
+
+        <br/> <br/>
+
+        <h:outputLabel styleClass="product-title" value="#{customerController.getFoundProductName()}"/>
+        <br/> <br/>
+        <h:outputLabel styleClass="product-description" value="#{customerController.getFoundProductDesc()}" rendered="#{customerController.getRenderResult()}"/> <h:outputLabel value = " "/>
+        <h:commandButton value="Add" rendered="#{customerController.getRenderResult()}"/>
+
+        <br/> <br/> <hr/> <br/>
 
         <h:outputLabel styleClass="product-title" value="#{customerController.getProd1().getName()}"/>
         <br/> <br/>
@@ -36,7 +48,6 @@
         <br/> <br/>
         <h:commandButton value="Add"/>
         <br/> <br/> <br/> <br/>
-
 
         <h:outputLabel value="#{loginAndRegisterController.currentUser.getUsername()}"/>
         <br/>
