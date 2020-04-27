@@ -67,14 +67,13 @@
 
         <!--*************CART************-->
         <h1>Your cart</h1>
-        <h:dataTable value="#{customerController.cartList}" var="product" border="8"  cellpadding="10">
-            <f:facet name="header">Product</f:facet>
-            <h:column>
+        <h:dataTable styleClass="cart-tabell" value="#{customerController.cartList}" var="product">
+            <h:column styleClass="col-name">
                 <h:outputText id="name" value="#{product.name}"></h:outputText>
             </h:column>
 
-            <h:column>
-                <h:outputText id="pris" value="#{product.price}"></h:outputText>
+            <h:column styleClass="col-price">
+                <h:outputText id="pris" value="#{product.price} kr"></h:outputText>
             </h:column>
 
         </h:dataTable>
