@@ -8,6 +8,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,21 +20,16 @@ public class CustomerController implements Serializable {
     private String foundProductName = "";
     private String foundProductDesc = "";
     private boolean renderResult = false;
+    private List <Product> cartList = new ArrayList<>();
 
     @EJB
     CustomerHandlerLocal customerHandlerLocal;
 
-    public Product getProd1() {
-        return customerHandlerLocal.getProductsfromDb().get(0);
-    }
+    // public Product getProd1() { return customerHandlerLocal.getProductsfromDb().get(0); }
 
-    public Product getProd2() {
-        return customerHandlerLocal.getProductsfromDb().get(1);
-    }
+    // public Product getProd2() { return customerHandlerLocal.getProductsfromDb().get(1); }
 
-    public Product getProd3()  {
-        return customerHandlerLocal.getProductsfromDb().get(2);
-    }
+    // public Product getProd3()  { return customerHandlerLocal.getProductsfromDb().get(2); }
 
     //Reference till produktlistan
     public List <Product> getProductsList(){
@@ -53,6 +49,17 @@ public class CustomerController implements Serializable {
             else {
                 foundProductName = "Not found!";
                 renderResult = false;
+            }
+        }
+    }
+
+    public void add (String name) {
+        Product temp = null;
+        for (int i = 0; i < getProductsList().size(); i++) {
+            if (getProductsList().get(i).getName().equals(name)) {
+                temp = getProductsList().get(i);
+                cartList.add(new Product(temp.getName(), temp.getDescription(), temp.getPrice()));
+                break;
             }
         }
     }
@@ -87,5 +94,13 @@ public class CustomerController implements Serializable {
 
     public void setRenderResult(boolean renderResult) {
         this.renderResult = renderResult;
+    }
+
+    public List<Product> getCartList() {
+        return cartList;
+    }
+
+    public void setCartList(List<Product> cartList) {
+        this.cartList = cartList;
     }
 }
