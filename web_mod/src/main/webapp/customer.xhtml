@@ -77,7 +77,8 @@
                 </h:column>
             </h:dataTable>
             <br/>
-            <h:outputLabel value="Total: #{customerController.getCartTotal()} kr"/>
+            <h:outputLabel value="Total: #{customerController.getCartTotal(loginAndRegisterController.currentUser)} kr"/>
+            <h:outputLabel value=" (Premium discount included!)" rendered="#{customerController.getRenderDiscountMsg()}"/>
             <br/>
             <h:commandButton value = "köp" action="#{customerController.confrimOrder}"/>
         </div>

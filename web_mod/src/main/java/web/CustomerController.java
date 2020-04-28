@@ -2,6 +2,8 @@ package web;
 
 import ejb.CustomerHandlerLocal;
 import ejb.Product;
+import ejb.Role;
+import ejb.User;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -19,6 +21,7 @@ public class CustomerController implements Serializable {
     private String foundProductName = "";
     private String foundProductDesc = "";
     private boolean renderResult = false;
+    private boolean renderDiscountMsg = false;
     private List <Product> cartList = new ArrayList<>();
     private List <Product> confirmedOrder = new ArrayList<>();
     private double cartTotal;
@@ -53,10 +56,15 @@ public class CustomerController implements Serializable {
         }
     }
 
-    public double calculateTotal(){
+    public double calculateTotal(User currentUser){
         double total = 0;
         for (Product product: cartList)
             total = total + product.getPrice();
+        if (currentUser.getRole() == Role.PREMIUM_CUSTOMER) {
+            renderDiscountMsg=true;
+            return total * 0.90;
+        }
+        renderDiscountMsg=false;
         return total;
     }
 
@@ -122,6 +130,14 @@ public class CustomerController implements Serializable {
         this.renderResult = renderResult;
     }
 
+    public boolean getRenderDiscountMsg() {
+        return renderDiscountMsg;
+    }
+
+    public void setRenderDiscountMsg(boolean renderDiscountMsg) {
+        this.renderDiscountMsg = renderDiscountMsg;
+    }
+
     public List<Product> getCartList() {
         return cartList;
     }
@@ -130,8 +146,8 @@ public class CustomerController implements Serializable {
         this.cartList = cartList;
     }
 
-    public double getCartTotal() {
-        this.cartTotal= calculateTotal();
+    public double getCartTotal(User currentUser) {
+        this.cartTotal= calculateTotal(currentUser);
         return cartTotal;
     }
 }
