@@ -76,7 +76,12 @@ public class LoginAndRegisterController implements Serializable {
 //    }
 
     public String registerNewCustomer() {
-        this.message = userHandlerLocal.addNewUser(usernameInput, passwordInput);
+        boolean userAdded = userHandlerLocal.addNewUser(usernameInput, passwordInput);
+        if (userAdded) {
+            this.message = "User added successfully";
+        } else {
+            this.message = "User with username \"" + usernameInput + "\" already exists";
+        }
         return "index";
     }
 
