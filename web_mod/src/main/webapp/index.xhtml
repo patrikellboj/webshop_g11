@@ -5,16 +5,29 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>webshop_G11</title>
+</h:head>
 <h:body>
+    <h:outputStylesheet library="css" name="style.css" />
+
     <h:form>
-        <h:outputLabel for="greeting">
-            <h:outputText value="Enter random greeting: "/>
-        </h:outputLabel>
-        <h:inputText id="greeting" value="#{testController.greeting}" disabled="false"/>
+        <h:outputLabel styleClass="username-label" value="User:"/>
+        <h:inputText styleClass="username-value" value="#{loginAndRegisterController.usernameInput}"/>
         <br/>
-        <h:commandButton action="#{testController.greeting()}" value="Test your greeting"/>
+
+        <!--        redisplay="true" måste användas om en styleklass används-->
+        <h:outputLabel styleClass="password-label" value="Password:"/>
+        <h:inputSecret styleClass="password-value" redisplay="true" value="#{loginAndRegisterController.passwordInput}"/>
         <br/>
-        <h:outputText value="#{testController.greeting}"/>
+
+        <h:commandButton styleClass="login-register-btn" action="#{loginAndRegisterController.login()}" value="Login"/>
+        <h:commandButton styleClass="login-register-btn" action="register" value="Register"/>
+        <br/>
+
+        <h:outputLabel styleClass="login-message" value="#{loginAndRegisterController.message}"/>
+        <br/>
     </h:form>
 </h:body>
 </html>

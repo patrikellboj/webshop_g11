@@ -1,0 +1,46 @@
+.username-label, .password-label{
+    display: inline-block;
+    color: red;
+    width: 200px;
+    border-style: solid;
+}
+
+.username-value, .password-value{
+    display: inline-block;
+    color: blue;
+    width: 200px;
+    border-style: solid;
+}
+
+.alexander{
+    width: 200px;
+}
+
+.login-register-btn {
+    color: lightgreen;
+    background-color: teal;
+}
+
+.product-title{
+    color: black;
+    font-size: 20px;
+}
+
+.product-description {
+    color: black;
+    background: antiquewhite;
+}
+
+.cart-tabell {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.col-name{
+    width: 200px;
+}
+
+.col-price{
+    width: 200px;
+    text-align: right;
+}
