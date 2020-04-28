@@ -26,7 +26,6 @@
         <h:outputLabel styleClass="product-description" value="#{customerController.getFoundProductDesc()}" rendered="#{customerController.getRenderResult()}"/> <h:outputLabel value = " "/>
         <h:commandButton value="Add" action="#{customerController.add(customerController.getFoundProductName())}" rendered="#{customerController.getRenderResult()}"/>
 
-
         <br/> <br/> <hr/> <br/>
         <!--************PRODUCTS************-->
         <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(0).getName()}"/>
@@ -66,7 +65,6 @@
         <br/> <br/>
 
         <!--*************CART************-->
-
         <div>
             <h1>Your cart</h1>
             <h:dataTable styleClass="cart-tabell" value="#{customerController.cartList}" var="product">
@@ -80,9 +78,9 @@
             </h:dataTable>
             <br/>
             <h:outputLabel value="Total: #{customerController.getCartTotal()} kr"/>
+            <br/>
+            <h:commandButton value = "köp" action="#{customerController.confrimOrder}"/>
         </div>
-
-
     </h:form>
 </h:body>
 </html>

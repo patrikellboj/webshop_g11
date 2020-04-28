@@ -2,7 +2,6 @@ package web;
 
 import ejb.CustomerHandlerLocal;
 import ejb.Product;
-import ejb.UserHandlerLocal;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -21,18 +20,75 @@ public class CustomerController implements Serializable {
     private String foundProductDesc = "";
     private boolean renderResult = false;
     private List <Product> cartList = new ArrayList<>();
+    private List <Product> confirmedOrder = new ArrayList<>();
     private double cartTotal;
+    private double orderTotal;
 
     @EJB
     CustomerHandlerLocal customerHandlerLocal;
 
-
-    //Reference till produktlistan
+    //Referens till produktlistan
     public List <Product> getProductsList(){
         return customerHandlerLocal.getProductsfromDb();
     }
 
+    public List <Product> getConfirmedOrder(){
+        return this.confirmedOrder;
+    }
 
+    public void findProduct(String name) {
+        Product temp = null;
+        for(int i = 0; i < getProductsList().size(); i++) {
+            if(getProductsList().get(i).getName().equals(name)) {
+                temp = getProductsList().get(i);
+                foundProductName = temp.getName();
+                foundProductDesc = temp.getDescription();
+                renderResult = true;
+                break;
+            }
+            else {
+                foundProductName = "Not found!";
+                renderResult = false;
+            }
+        }
+    }
+
+    public double calculateTotal(){
+        double total = 0;
+        for (Product product: cartList)
+            total = total + product.getPrice();
+        return total;
+    }
+
+    public void add (String name) {
+        Product temp = null;
+        for (int i = 0; i < getProductsList().size(); i++) {
+            if (getProductsList().get(i).getName().equals(name)) {
+                temp = getProductsList().get(i);
+                cartList.add(new Product(temp.getName(), temp.getDescription(), temp.getPrice()));
+                break;
+            }
+        }
+    }
+
+    //Går till order sidan
+    public String confrimOrder(){
+        for(Product product : cartList) {
+            confirmedOrder.add(product);
+        }
+        orderTotal = cartTotal;
+        cartList.clear(); //Tömmer varukorgen
+        return "order";
+    }
+
+    public String backToShop() {
+        confirmedOrder.clear(); //Tömmer bekräftelse listan
+        return "customer";
+    }
+
+    public double getOrderTotal(){
+        return this.orderTotal;
+    }
 
     public String getSearchInput() {
         return searchInput;
@@ -78,45 +134,4 @@ public class CustomerController implements Serializable {
         this.cartTotal= calculateTotal();
         return cartTotal;
     }
-
-
-
-    //att flytta till Ejb_model?
-
-    public double calculateTotal(){
-        double total = 0;
-        for (Product product: cartList)
-            total = total + product.getPrice();
-        return total;
-    }
-
-
-    public void findProduct(String name) {
-        Product temp = null;
-        for(int i = 0; i < getProductsList().size(); i++) {
-            if(getProductsList().get(i).getName().equals(name)) {
-                temp = getProductsList().get(i);
-                foundProductName = temp.getName();
-                foundProductDesc = temp.getDescription();
-                renderResult = true;
-                break;
-            }
-            else {
-                foundProductName = "Not found!";
-                renderResult = false;
-            }
-        }
-    }
-
-    public void add (String name) {
-        Product temp = null;
-        for (int i = 0; i < getProductsList().size(); i++) {
-            if (getProductsList().get(i).getName().equals(name)) {
-                temp = getProductsList().get(i);
-                cartList.add(new Product(temp.getName(), temp.getDescription(), temp.getPrice()));
-                break;
-            }
-        }
-    }
-
 }
