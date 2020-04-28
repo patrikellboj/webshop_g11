@@ -10,7 +10,7 @@ import java.util.List;
 @Local
 public interface UserHandlerLocal {
 
-    String addNewUser(String userName, String password);
+    boolean addNewUser(String userName, String password);
 
     User login(String userName, String password);
 

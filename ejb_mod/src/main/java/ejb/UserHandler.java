@@ -5,7 +5,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @Stateless
 //det blir deploy-fel om vi inte implementerar local eller remote interface:
@@ -52,7 +51,7 @@ public class UserHandler implements UserHandlerLocal {
     public User login(String userName, String password) {
         populateDBWithUsers();
         populateDBWithProducts();
-        User user = new User();
+        User user;
 
         try {
             // LOWER = till små bokstäver.
@@ -63,13 +62,11 @@ public class UserHandler implements UserHandlerLocal {
             // casta om det vi får tillbaka till en user
             user = (User) query.getSingleResult();
         } catch (NoResultException e) {
-            // TODO: 2020-04-22 Ändra till logger metod eller ta bort sout
-            System.out.println("No result from db");
+            LoggHandler.logg(Level.INFO, "No result from db");
             e.printStackTrace();
             return null;
         } catch (NonUniqueResultException e) {
-            // TODO: 2020-04-22 Ändra till logger metod eller ta bort sout
-            System.out.println("Found more than one user");
+            LoggHandler.logg(Level.INFO, "Error: Found more than one user");
             e.printStackTrace();
             return null;
         }
@@ -77,11 +74,25 @@ public class UserHandler implements UserHandlerLocal {
     }
 
     @Override
-    public String addNewUser(String userName, String password) {
-        User user = new User(userName, password, Role.CUSTOMER);
-        persist(user);
-        return "User added successfully";
+    public boolean addNewUser(String userName, String password) {
+        populateDBWithUsers();
+        User user;
+        List<User> resultFromDb = new ArrayList<>();
+        boolean userAdded = false;
+        try {
+            TypedQuery<User> query = em.createQuery("SELECT u FROM User u WHERE LOWER(u.username) = LOWER(:userName)", User.class);
+            query.setParameter("userName", userName);
+            resultFromDb = query.getResultList();
+            if (resultFromDb.size() < 1) {
+                user = new User(userName, password, Role.CUSTOMER);
+                persist(user);
+                userAdded = true;
+            }
+        } catch (Exception e) {
+            LoggHandler.logg(Level.INFO, "Exception!");
+            e.printStackTrace();
+        }
+        return userAdded;
     }
-
 
 }
