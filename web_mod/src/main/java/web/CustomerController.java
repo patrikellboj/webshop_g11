@@ -21,48 +21,18 @@ public class CustomerController implements Serializable {
     private String foundProductDesc = "";
     private boolean renderResult = false;
     private List <Product> cartList = new ArrayList<>();
+    private double cartTotal;
 
     @EJB
     CustomerHandlerLocal customerHandlerLocal;
 
-    // public Product getProd1() { return customerHandlerLocal.getProductsfromDb().get(0); }
-
-    // public Product getProd2() { return customerHandlerLocal.getProductsfromDb().get(1); }
-
-    // public Product getProd3()  { return customerHandlerLocal.getProductsfromDb().get(2); }
 
     //Reference till produktlistan
     public List <Product> getProductsList(){
         return customerHandlerLocal.getProductsfromDb();
     }
 
-    public void findProduct(String name) {
-        Product temp = null;
-        for(int i = 0; i < getProductsList().size(); i++) {
-            if(getProductsList().get(i).getName().equals(name)) {
-                temp = getProductsList().get(i);
-                foundProductName = temp.getName();
-                foundProductDesc = temp.getDescription();
-                renderResult = true;
-                break;
-            }
-            else {
-                foundProductName = "Not found!";
-                renderResult = false;
-            }
-        }
-    }
 
-    public void add (String name) {
-        Product temp = null;
-        for (int i = 0; i < getProductsList().size(); i++) {
-            if (getProductsList().get(i).getName().equals(name)) {
-                temp = getProductsList().get(i);
-                cartList.add(new Product(temp.getName(), temp.getDescription(), temp.getPrice()));
-                break;
-            }
-        }
-    }
 
     public String getSearchInput() {
         return searchInput;
@@ -103,4 +73,50 @@ public class CustomerController implements Serializable {
     public void setCartList(List<Product> cartList) {
         this.cartList = cartList;
     }
+
+    public double getCartTotal() {
+        this.cartTotal= calculateTotal();
+        return cartTotal;
+    }
+
+
+
+    //att flytta till Ejb_model?
+
+    public double calculateTotal(){
+        double total = 0;
+        for (Product product: cartList)
+            total = total + product.getPrice();
+        return total;
+    }
+
+
+    public void findProduct(String name) {
+        Product temp = null;
+        for(int i = 0; i < getProductsList().size(); i++) {
+            if(getProductsList().get(i).getName().equals(name)) {
+                temp = getProductsList().get(i);
+                foundProductName = temp.getName();
+                foundProductDesc = temp.getDescription();
+                renderResult = true;
+                break;
+            }
+            else {
+                foundProductName = "Not found!";
+                renderResult = false;
+            }
+        }
+    }
+
+    public void add (String name) {
+        Product temp = null;
+        for (int i = 0; i < getProductsList().size(); i++) {
+            if (getProductsList().get(i).getName().equals(name)) {
+                temp = getProductsList().get(i);
+                cartList.add(new Product(temp.getName(), temp.getDescription(), temp.getPrice()));
+                break;
+            }
+        }
+    }
+
 }
