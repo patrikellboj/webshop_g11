@@ -75,11 +75,15 @@
                 <h:column styleClass="col-price">
                     <h:outputText id="pris" value="#{product.price} kr"></h:outputText>
                 </h:column>
+                <h:column>
+                    <h:commandButton value = "Ta bort" action = "#{customerController.removeItem(product.name)}"/>
+                </h:column>
             </h:dataTable>
             <br/>
             <h:outputLabel value="Total: #{customerController.getCartTotal()} kr"/>
             <br/>
             <h:commandButton value = "köp" action="#{customerController.confrimOrder}"/>
+            <h:commandButton value = "Töm varukorg" action="#{customerController.getCartList().clear()}"/>
         </div>
     </h:form>
 </h:body>

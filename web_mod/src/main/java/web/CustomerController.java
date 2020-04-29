@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Named (value = "customerController")
 @SessionScoped
 public class CustomerController implements Serializable {
@@ -67,6 +66,14 @@ public class CustomerController implements Serializable {
                 temp = getProductsList().get(i);
                 cartList.add(new Product(temp.getName(), temp.getDescription(), temp.getPrice()));
                 break;
+            }
+        }
+    }
+
+    public void removeItem(String name){
+        for(int i = 0; i < cartList.size(); i++) {
+            if(cartList.get(i).getName().equals(name)){
+                cartList.remove(i);
             }
         }
     }
