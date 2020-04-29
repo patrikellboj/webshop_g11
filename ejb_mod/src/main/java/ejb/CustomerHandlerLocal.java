@@ -6,4 +6,6 @@ public interface CustomerHandlerLocal {
 
     public List<Product> getProductsfromDb();
 
+    public void registerNewOrder( User current, List <Product> cartList);
+
 }

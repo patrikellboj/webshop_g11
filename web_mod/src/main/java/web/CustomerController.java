@@ -1,9 +1,6 @@
 package web;
 
-import ejb.CustomerHandlerLocal;
-import ejb.Product;
-import ejb.Role;
-import ejb.User;
+import ejb.*;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -11,12 +8,16 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 
 @Named (value = "customerController")
 @SessionScoped
 public class CustomerController implements Serializable {
 
+
+    @EJB
+    CustomerHandlerLocal customerHandlerLocal;
     private String searchInput = "";
     private String foundProductName = "";
     private String foundProductDesc = "";
@@ -27,17 +28,10 @@ public class CustomerController implements Serializable {
     private double cartTotal;
     private double orderTotal;
 
-    @EJB
-    CustomerHandlerLocal customerHandlerLocal;
+    //----------------------------------------------------------
 
     //Referens till produktlistan
-    public List <Product> getProductsList(){
-        return customerHandlerLocal.getProductsfromDb();
-    }
 
-    public List <Product> getConfirmedOrder(){
-        return this.confirmedOrder;
-    }
 
     public void findProduct(String name) {
         Product temp = null;
@@ -80,11 +74,14 @@ public class CustomerController implements Serializable {
     }
 
     //Går till order sidan
-    public String confrimOrder(){
+    public String confirmOrder(User currentUser){
         for(Product product : cartList) {
             confirmedOrder.add(product);
         }
+        LoggHandler.logg(Level.INFO, currentUser.getUsername());
+        LoggHandler.logg(Level.INFO, confirmedOrder.get(1).getName());
         orderTotal = cartTotal;
+        customerHandlerLocal.registerNewOrder(currentUser, confirmedOrder);
         cartList.clear(); //Tömmer varukorgen
         return "order";
     }
@@ -92,6 +89,15 @@ public class CustomerController implements Serializable {
     public String backToShop() {
         confirmedOrder.clear(); //Tömmer bekräftelse listan
         return "customer";
+    }
+
+    public List <Product> getProductsList(){
+        return customerHandlerLocal.getProductsfromDb();
+    }
+
+    public List <Product> getConfirmedOrder(){
+
+        return this.confirmedOrder;
     }
 
     public double getOrderTotal(){

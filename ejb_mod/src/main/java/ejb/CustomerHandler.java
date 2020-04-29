@@ -31,4 +31,13 @@ public class CustomerHandler implements CustomerHandlerLocal {
         }
         return products;
     }
+
+    public void registerNewOrder(User current, List <Product> confirmedList ){
+        Orders newOrder= new Orders(current, confirmedList);
+        //LoggHandler.logg(Level.INFO, newOrder.getUser().getUsername());                //det funkar
+        //LoggHandler.logg(Level.INFO, confirmedList.get(1).getName());                 //det funkar
+        //LoggHandler.logg(Level.INFO, newOrder.getProductList().get(1).getName());     //det funkar
+    }
+
+
 }

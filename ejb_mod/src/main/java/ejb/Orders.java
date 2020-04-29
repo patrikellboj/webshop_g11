@@ -24,11 +24,14 @@ public class Orders implements Serializable {
     private User user;
     @ManyToMany(cascade=PERSIST,mappedBy="ordersList")
     private List<Product> productList;
-    private String text;
-
     //-------------------------------------
 
     public Orders() {}
+
+    public Orders(User user, List<Product> productList) {
+        this.user = user;
+        this.productList = productList;
+    }
 
 
     //-------------------------------------
@@ -50,11 +53,6 @@ public class Orders implements Serializable {
         this.productList = productList;
     }
 
-    public String getText() {
-        return text;
-    }
 
-    public void setText(String text) {
-        this.text = text;
-    }
+
 }
