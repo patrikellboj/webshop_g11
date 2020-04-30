@@ -51,14 +51,11 @@ public class CustomerController implements Serializable {
     }
 
     public double calculateTotal(User currentUser){
-        double total = 0;
-        for (Product product: cartList)
-            total = total + product.getPrice();
-        if (currentUser.getRole() == Role.PREMIUM_CUSTOMER) {
+        double total= customerHandlerLocal.calculateTotal(currentUser, cartList);
+        if (currentUser.getRole() == Role.PREMIUM_CUSTOMER)
             renderDiscountMsg=true;
-            return total * 0.90;
-        }
-        renderDiscountMsg=false;
+        else
+            renderDiscountMsg=false;
         return total;
     }
 

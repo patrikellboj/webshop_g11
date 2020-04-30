@@ -39,5 +39,15 @@ public class CustomerHandler implements CustomerHandlerLocal {
         //LoggHandler.logg(Level.INFO, newOrder.getProductList().get(1).getName());     //det funkar
     }
 
+    public double calculateTotal(User currentUser, List <Product> cartList ){
+        double total = 0;
+            for (Product product: cartList)
+        total = total + product.getPrice();
+        if (currentUser.getRole() == Role.PREMIUM_CUSTOMER) {
+            return total * 0.90;
+        }
+        return total;
+    }
+
 
 }

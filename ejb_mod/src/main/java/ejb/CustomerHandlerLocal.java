@@ -8,4 +8,6 @@ public interface CustomerHandlerLocal {
 
     public void registerNewOrder( User current, List <Product> cartList);
 
+    public double calculateTotal(User currentUser, List <Product> cartList );
+
 }
