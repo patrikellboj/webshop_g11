@@ -15,12 +15,25 @@
     <br/>
     <br/>
     <h:form>
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getUsername()}"/>
+        <h:dataTable styleClass="cart-tabell" value="#{adminController.getUsers()}" var="user">
+            <h:column>
+                <h:commandButton id="customer" value="#{user.username}" action="#{adminController.getUserInfo(user.username)}"/>
+            </h:column>
+        </h:dataTable>
+
+        <h:dataTable styleClass="cart-tabell" value="#{adminController.getSelectedUserOrders()}" var="orders" rendered="#{adminController.getRenderOrders()}">
+            <h:column>
+                <h:commandButton id="order" value="#{orders.getUser().getUsername()}"/>
+            </h:column>
+        </h:dataTable>
+
+        <br/> <br/>
+        <h:outputLabel value="#{adminController.getSelectedUserUsername()}"/>
         <br/>
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getPassword()}"/>
+        <h:outputLabel value="#{adminController.getSelectedUserPassword()}"/>
         <br/>
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getRole()}"/>
-        <br/>
+        <h:outputLabel value="#{adminController.getSelectedUserRole()}"/>
+        <br/> <br/>
     </h:form>
 </h:body>
 </html>

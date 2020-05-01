@@ -17,6 +17,4 @@ public interface UserHandlerLocal {
     void populateDBWithUsers();
 
     void populateDBWithProducts();
-
-
 }

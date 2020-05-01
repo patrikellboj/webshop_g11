@@ -94,5 +94,4 @@ public class UserHandler implements UserHandlerLocal {
         }
         return userAdded;
     }
-
 }

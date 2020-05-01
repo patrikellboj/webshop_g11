@@ -16,6 +16,7 @@ import java.util.List;
 @SessionScoped
 public class LoginAndRegisterController implements Serializable {
 
+
     @EJB
     UserHandlerLocal userHandlerLocal;
     private String usernameInput;
