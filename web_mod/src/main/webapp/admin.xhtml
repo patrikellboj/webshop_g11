@@ -21,13 +21,16 @@
             </h:column>
         </h:dataTable>
 
+        <br/>
+
         <h:dataTable styleClass="cart-tabell" value="#{adminController.getSelectedUserOrders()}" var="orders" rendered="#{adminController.getRenderOrders()}">
             <h:column>
                 <h:commandButton id="order" value="#{orders.getUser().getUsername()}"/>
             </h:column>
         </h:dataTable>
 
-        <br/> <br/>
+        <br/>
+
         <h:outputLabel value="#{adminController.getSelectedUserUsername()}"/>
         <br/>
         <h:outputLabel value="#{adminController.getSelectedUserPassword()}"/>
