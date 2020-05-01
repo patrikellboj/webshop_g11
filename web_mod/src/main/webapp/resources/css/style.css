@@ -1,24 +1,45 @@
+.body{
+    margin: auto;
+}
+
+.form{
+    margin: auto;
+}
+
+.user-password{
+    display: block;
+    width: 252px;
+    margin: auto;
+}
+
+.index-buttons{
+    display: block;
+    width: 160px;
+    margin: auto;
+}
+
 .username-label, .password-label{
     display: inline-block;
-    color: red;
-    width: 200px;
-    border-style: solid;
+    width: 120px;
 }
 
 .username-value, .password-value{
     display: inline-block;
-    color: blue;
-    width: 200px;
+    width: 120px;
     border-style: solid;
+    border-width: 0.5px;
 }
 
-.alexander{
-    width: 200px;
+.logo{
+    margin: auto;
+    display: block;
+    width: 250px;
 }
 
 .login-register-btn {
     color: lightgreen;
     background-color: teal;
+    width: 80px;
 }
 
 .product-title{
@@ -43,4 +64,11 @@
 .col-price{
     width: 200px;
     text-align: right;
+}
+
+.login-message{
+    text-align: center;
+    display: block;
+    width: 200px;
+    margin: auto;
 }

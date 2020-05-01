@@ -1,7 +1,6 @@
 package web;
 
-import ejb.CustomerHandlerLocal;
-import ejb.Product;
+import ejb.*;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
@@ -9,32 +8,30 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 
 
 @Named (value = "customerController")
 @SessionScoped
 public class CustomerController implements Serializable {
 
+
+    @EJB
+    CustomerHandlerLocal customerHandlerLocal;
     private String searchInput = "";
     private String foundProductName = "";
     private String foundProductDesc = "";
     private boolean renderResult = false;
+    private boolean renderDiscountMsg = false;
     private List <Product> cartList = new ArrayList<>();
     private List <Product> confirmedOrder = new ArrayList<>();
     private double cartTotal;
     private double orderTotal;
 
-    @EJB
-    CustomerHandlerLocal customerHandlerLocal;
+    //----------------------------------------------------------
 
     //Referens till produktlistan
-    public List <Product> getProductsList(){
-        return customerHandlerLocal.getProductsfromDb();
-    }
 
-    public List <Product> getConfirmedOrder(){
-        return this.confirmedOrder;
-    }
 
     public void findProduct(String name) {
         Product temp = null;
@@ -53,10 +50,12 @@ public class CustomerController implements Serializable {
         }
     }
 
-    public double calculateTotal(){
-        double total = 0;
-        for (Product product: cartList)
-            total = total + product.getPrice();
+    public double calculateTotal(User currentUser){
+        double total= customerHandlerLocal.calculateTotal(currentUser, cartList);
+        if (currentUser.getRole() == Role.PREMIUM_CUSTOMER)
+            renderDiscountMsg=true;
+        else
+            renderDiscountMsg=false;
         return total;
     }
 
@@ -72,11 +71,14 @@ public class CustomerController implements Serializable {
     }
 
     //Går till order sidan
-    public String confrimOrder(){
+    public String confirmOrder(User currentUser){
         for(Product product : cartList) {
             confirmedOrder.add(product);
         }
+        LoggHandler.logg(Level.INFO, currentUser.getUsername());
+        LoggHandler.logg(Level.INFO, confirmedOrder.get(1).getName());
         orderTotal = cartTotal;
+        customerHandlerLocal.registerNewOrder(currentUser, confirmedOrder);
         cartList.clear(); //Tömmer varukorgen
         return "order";
     }
@@ -84,6 +86,15 @@ public class CustomerController implements Serializable {
     public String backToShop() {
         confirmedOrder.clear(); //Tömmer bekräftelse listan
         return "customer";
+    }
+
+    public List <Product> getProductsList(){
+        return customerHandlerLocal.getProductsfromDb();
+    }
+
+    public List <Product> getConfirmedOrder(){
+
+        return this.confirmedOrder;
     }
 
     public double getOrderTotal(){
@@ -122,6 +133,14 @@ public class CustomerController implements Serializable {
         this.renderResult = renderResult;
     }
 
+    public boolean getRenderDiscountMsg() {
+        return renderDiscountMsg;
+    }
+
+    public void setRenderDiscountMsg(boolean renderDiscountMsg) {
+        this.renderDiscountMsg = renderDiscountMsg;
+    }
+
     public List<Product> getCartList() {
         return cartList;
     }
@@ -130,8 +149,8 @@ public class CustomerController implements Serializable {
         this.cartList = cartList;
     }
 
-    public double getCartTotal() {
-        this.cartTotal= calculateTotal();
+    public double getCartTotal(User currentUser) {
+        this.cartTotal= calculateTotal(currentUser);
         return cartTotal;
     }
 }

@@ -10,24 +10,31 @@
     <title>webshop_G11</title>
 </h:head>
 <h:body>
+    <div>
     <h:outputStylesheet library="css" name="style.css" />
-
-    <h:form>
+    <br/>
+    <h:graphicImage styleClass="logo" library="Images" name="logo.png"/>
+    <br/>
+    <h:form styleClass="form">
+        <div class="user-password">
         <h:outputLabel styleClass="username-label" value="User:"/>
         <h:inputText styleClass="username-value" value="#{loginAndRegisterController.usernameInput}"/>
         <br/>
-
         <!--        redisplay="true" måste användas om en styleklass används-->
-        <h:outputLabel styleClass="password-label" value="Password:"/>
-        <h:inputSecret styleClass="password-value" redisplay="true" value="#{loginAndRegisterController.passwordInput}"/>
+            <h:outputLabel styleClass="password-label" value="Password:"/>
+            <h:inputSecret styleClass="password-value" redisplay="true" value="#{loginAndRegisterController.passwordInput}"/>
+        </div>
         <br/>
 
-        <h:commandButton styleClass="login-register-btn" action="#{loginAndRegisterController.login()}" value="Login"/>
-        <h:commandButton styleClass="login-register-btn" action="register" value="Register"/>
+        <div class="index-buttons">
+            <h:commandButton styleClass="login-register-btn" action="#{loginAndRegisterController.login()}" value="Login"/>
+            <h:commandButton styleClass="login-register-btn" action="register" value="Register"/>
+        </div>
         <br/>
 
         <h:outputLabel styleClass="login-message" value="#{loginAndRegisterController.message}"/>
         <br/>
     </h:form>
+    </div>
 </h:body>
 </html>
