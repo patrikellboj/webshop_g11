@@ -19,10 +19,7 @@ public class Product implements Serializable {
     private String name;
     private String description;
     private double price;
-    @ManyToMany(cascade=PERSIST)
-    @JoinTable(name = "orders_product",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "orders_id"))
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy="productList")
     private List<Orders> ordersList;
 //-----------------------------------------
 

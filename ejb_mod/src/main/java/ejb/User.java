@@ -22,9 +22,8 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false) // Får inte vara null
     private String password;
     private Role role;
-    //private List<User> users = new ArrayList<>();
-    @OneToMany(cascade=PERSIST, mappedBy="user")
-    private List<Orders> ordersList =new ArrayList();
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy="user")
+    private List<Orders> ordersList = new ArrayList<>();
 
 
 

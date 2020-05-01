@@ -34,7 +34,7 @@ public class CustomerController implements Serializable {
 
 
     public void findProduct(String name) {
-        Product temp = null;
+        Product temp;
         for(int i = 0; i < getProductsList().size(); i++) {
             if(getProductsList().get(i).getName().equals(name)) {
                 temp = getProductsList().get(i);
@@ -52,15 +52,12 @@ public class CustomerController implements Serializable {
 
     public double calculateTotal(User currentUser){
         double total= customerHandlerLocal.calculateTotal(currentUser, cartList);
-        if (currentUser.getRole() == Role.PREMIUM_CUSTOMER)
-            renderDiscountMsg=true;
-        else
-            renderDiscountMsg=false;
+        renderDiscountMsg = currentUser.getRole() == Role.PREMIUM_CUSTOMER;
         return total;
     }
 
     public void add (String name) {
-        Product temp = null;
+        Product temp;
         for (int i = 0; i < getProductsList().size(); i++) {
             if (getProductsList().get(i).getName().equals(name)) {
                 temp = getProductsList().get(i);
@@ -72,11 +69,9 @@ public class CustomerController implements Serializable {
 
     //Går till order sidan
     public String confirmOrder(User currentUser){
-        for(Product product : cartList) {
-            confirmedOrder.add(product);
-        }
-        LoggHandler.logg(Level.INFO, currentUser.getUsername());
-        LoggHandler.logg(Level.INFO, confirmedOrder.get(1).getName());
+        confirmedOrder.addAll(cartList);
+//        LoggHandler.logg(Level.INFO, currentUser.getUsername());
+//        LoggHandler.logg(Level.INFO, confirmedOrder.get(1).getName());
         orderTotal = cartTotal;
         customerHandlerLocal.registerNewOrder(currentUser, confirmedOrder);
         cartList.clear(); //Tömmer varukorgen
