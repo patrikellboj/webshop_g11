@@ -18,18 +18,19 @@ public class Orders implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Basic(optional=false)
+    @Basic(optional = false)
     private long id;
     @ManyToOne
     private User user;
     @JoinTable(name = "product_in_order",
             joinColumns = @JoinColumn(name = "orders_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Product> productList;
     //-------------------------------------
 
-    public Orders() {}
+    public Orders() {
+    }
 
     public Orders(User user, List<Product> productList) {
         this.user = user;
@@ -52,8 +53,4 @@ public class Orders implements Serializable {
     public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
-
-
-
-
 }

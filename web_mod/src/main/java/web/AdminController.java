@@ -8,7 +8,6 @@ import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
 
 @Named(value = "adminController")
 @SessionScoped
@@ -16,7 +15,7 @@ public class AdminController implements Serializable {
 
     @EJB
     AdminHandlerLocal adminHandlerLocal;
-    private List<Orders> selectedUserOrders = new ArrayList<>();
+    private List <Product> products = new ArrayList<>();
     private String selectedUserUsername;
     private String selectedUserPassword;
     private Enum selectedUserRole;
@@ -26,6 +25,10 @@ public class AdminController implements Serializable {
         return adminHandlerLocal.getUsersFromDB();
     }
 
+    public List<Orders> getOrders() {
+        return adminHandlerLocal.getOrdersOf(selectedUserUsername);
+    }
+
     public void getUserInfo(String username){
         for(User user : getUsers()) {
             if(user.getUsername().equals(username)) {
@@ -33,7 +36,6 @@ public class AdminController implements Serializable {
                 selectedUserPassword = user.getPassword();
                 selectedUserRole = user.getRole();
                 renderOrders = true;
-                selectedUserOrders = adminHandlerLocal.getOrdersOf(username);
             }
         }
     }
@@ -54,7 +56,11 @@ public class AdminController implements Serializable {
         return renderOrders;
     }
 
-    public List<Orders> getSelectedUserOrders() {
-        return selectedUserOrders;
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 }

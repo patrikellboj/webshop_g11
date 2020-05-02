@@ -23,12 +23,21 @@
 
         <br/>
 
-        <h:dataTable styleClass="cart-tabell" value="#{adminController.getSelectedUserOrders()}" var="orders" rendered="#{adminController.getRenderOrders()}">
+        <h:dataTable styleClass="cart-tabell" value="#{adminController.getOrders()}" var="orders" rendered="#{adminController.getRenderOrders()}">
             <h:column>
-                <h:commandButton id="order" value="#{orders.getUser().getUsername()}"/>
+                <h:commandButton id="order" value="#{orders.getUser().getUsername()}" action ="#{adminController.setProducts(orders.getProductList())}"/>
             </h:column>
         </h:dataTable>
 
+        <br/>
+        <h:dataTable styleClass="cart-tabell" value="#{adminController.getProducts()}" var="product" rendered="#{adminController.getRenderOrders()}">
+            <h:column>
+                <h:outputText value = "#{product.getName()}"/>
+            </h:column>
+            <h:column>
+                <h:outputText value = "#{product.getPrice()}"/>
+            </h:column>
+        </h:dataTable>
         <br/>
 
         <h:outputLabel value="#{adminController.getSelectedUserUsername()}"/>
@@ -36,6 +45,7 @@
         <h:outputLabel value="#{adminController.getSelectedUserPassword()}"/>
         <br/>
         <h:outputLabel value="#{adminController.getSelectedUserRole()}"/>
+
         <br/> <br/>
     </h:form>
 </h:body>
