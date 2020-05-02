@@ -22,6 +22,8 @@ public class User implements Serializable {
     @Column(name = "password", nullable = false) // Får inte vara null
     private String password;
     private Role role;
+    @Column(name = "totalAmount", nullable = false) // Får inte vara null
+    private double totalAmount;
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy="user")
     private List<Orders> ordersList = new ArrayList<>();
 
@@ -30,10 +32,11 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String userName, String password, Role role) {
+    public User(String userName, String password, Role role, double totalAmount) {
         this.username = userName;
         this.password = password;
         this.role = role;
+        this.totalAmount = totalAmount;
 
     }
 
@@ -71,37 +74,12 @@ public class User implements Serializable {
         this.ordersList = ordersList;
     }
 
- /*    //Logiken
-
-
-       public void populate(){
-        users.add(new User("kund","kund123", Role.CUSTOMER));
-        users.add(new User("premium","premium123", Role.PREMIUM_CUSTOMER));
-        users.add(new User("admin","admin123", Role.ADMIN));
+    public double getTotalAmount() {
+        return totalAmount;
     }
 
-
-    public User check(String usernameInput, String passwordInput) {
-        for (User user : users) {
-            if (usernameInput.equalsIgnoreCase(user.getUsername()) && passwordInput.equals(user.getPassword())) {
-                return user;
-            }
-        }
-        return null;
-    }*/
-
-
-/*
-    public String register(String usernameInput, String passwordInput) {
-        for (User user : users) {
-            if (usernameInput.equalsIgnoreCase(user.getUsername()))
-                return "Username alredy exists";
-        }
-        users.add(new User(usernameInput, passwordInput, Role.CUSTOMER));
-        return  "User added successfully";
+    public void setTotalAmount(double totalAmount) {
+        this.totalAmount = totalAmount;
     }
-
- */
-
 
 }

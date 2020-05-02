@@ -17,4 +17,6 @@ public interface UserHandlerLocal {
     void populateDBWithUsers();
 
     void populateDBWithProducts();
+
+    void uppdateTotalAmountAndRole(String username , double orderTotal);
 }

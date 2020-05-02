@@ -18,6 +18,9 @@ public class CustomerController implements Serializable {
 
     @EJB
     CustomerHandlerLocal customerHandlerLocal;
+    @EJB
+    UserHandlerLocal userHandlerLocal;
+
     private String searchInput = "";
     private String foundProductName = "";
     private String foundProductDesc = "";
@@ -74,6 +77,7 @@ public class CustomerController implements Serializable {
 //        LoggHandler.logg(Level.INFO, confirmedOrder.get(1).getName());
         orderTotal = cartTotal;
         customerHandlerLocal.registerNewOrder(currentUser, confirmedOrder);
+        userHandlerLocal.uppdateTotalAmountAndRole(currentUser.getUsername(), orderTotal);
         cartList.clear(); //Tömmer varukorgen
         return "order";
     }
@@ -87,10 +91,7 @@ public class CustomerController implements Serializable {
         return customerHandlerLocal.getProductsfromDb();
     }
 
-    public List <Product> getConfirmedOrder(){
-
-        return this.confirmedOrder;
-    }
+    public List <Product> getConfirmedOrder(){ return this.confirmedOrder; }
 
     public double getOrderTotal(){
         return this.orderTotal;
