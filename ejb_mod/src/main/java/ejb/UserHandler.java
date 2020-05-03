@@ -97,7 +97,7 @@ public class UserHandler implements UserHandlerLocal {
 
 
 
-   
+
     public void uppdateTotalAmountAndRole(String username, double orderTotal){
         User user = new User();
         try {
