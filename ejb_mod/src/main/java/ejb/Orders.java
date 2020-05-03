@@ -25,7 +25,7 @@ public class Orders implements Serializable {
     @JoinTable(name = "product_in_order",
             joinColumns = @JoinColumn(name = "orders_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) //La till
     private List<Product> productList;
     //-------------------------------------
 
