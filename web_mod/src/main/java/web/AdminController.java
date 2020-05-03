@@ -20,6 +20,7 @@ public class AdminController implements Serializable {
     private String selectedUserPassword;
     private Enum selectedUserRole;
     private boolean renderOrders = false;
+    private int orderCounter = 0;
 
     public List <User> getUsers() {
         return adminHandlerLocal.getUsersFromDB();
@@ -29,15 +30,22 @@ public class AdminController implements Serializable {
         return adminHandlerLocal.getOrdersOf(selectedUserUsername);
     }
 
-    public void getUserInfo(String username){
-        for(User user : getUsers()) {
-            if(user.getUsername().equals(username)) {
+    public void getUserInfo(String username) {
+        for (User user : getUsers()) {
+            if (user.getUsername().equals(username)) {
                 selectedUserUsername = user.getUsername();
                 selectedUserPassword = user.getPassword();
                 selectedUserRole = user.getRole();
                 renderOrders = true;
             }
         }
+        orderCounter = 0;
+        products.clear();
+    }
+
+    public int getOrderCounter(){
+        orderCounter++;
+        return orderCounter;
     }
 
     public String getSelectedUserUsername() {
@@ -61,6 +69,7 @@ public class AdminController implements Serializable {
     }
 
     public void setProducts(List<Product> products) {
+        orderCounter = 0;
         this.products = products;
     }
 }
