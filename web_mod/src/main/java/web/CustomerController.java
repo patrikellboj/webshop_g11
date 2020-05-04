@@ -82,6 +82,14 @@ public class CustomerController implements Serializable {
         return "order";
     }
 
+    public void removeItem(Product p){
+        for(int i = 0; i < cartList.size(); i++) {
+            if(cartList.get(i).hashCode() == p.hashCode()){
+                cartList.remove(i);
+            }
+        }
+    }
+
     public String backToShop() {
         confirmedOrder.clear(); //Tömmer bekräftelse listan
         return "customer";
@@ -91,7 +99,9 @@ public class CustomerController implements Serializable {
         return customerHandlerLocal.getProductsfromDb();
     }
 
-    public List <Product> getConfirmedOrder(){ return this.confirmedOrder; }
+    public List <Product> getConfirmedOrder() {
+        return this.confirmedOrder;
+    }
 
     public double getOrderTotal(){
         return this.orderTotal;

@@ -98,9 +98,11 @@
                 <h:column styleClass="col-name">
                     <h:outputText id="name" value="#{product.name}"/>
                 </h:column>
-
                 <h:column styleClass="col-price">
                     <h:outputText id="pris" value="#{product.price} kr"/>
+                </h:column>
+                <h:column>
+                    <h:commandButton value = "Ta bort" action = "#{customerController.removeItem(product)}"/>
                 </h:column>
             </h:dataTable>
             <br/>
@@ -108,6 +110,7 @@
             <h:outputLabel value=" (Premium discount included!)" rendered="#{customerController.getRenderDiscountMsg()}"/>
             <br/>
             <h:commandButton value = "Buy" action="#{customerController.confirmOrder(loginAndRegisterController.currentUser)}"/>
+            <h:commandButton value = "Töm varukorg" action="#{customerController.getCartList().clear()}"/>
         </div>
     </h:form>
 
