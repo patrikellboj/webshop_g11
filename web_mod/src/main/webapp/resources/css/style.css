@@ -72,3 +72,27 @@
     width: 200px;
     margin: auto;
 }
+
+
+.product-block {
+    display: inline-block;
+    width: 500px;
+}
+
+.cart-block {
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+}
+
+.search-block {
+    display: inline-block;
+    width:  500px;
+}
+
+.logout-block {
+    display: inline-block;
+    width: 300px;
+    vertical-align: top;
+}
+

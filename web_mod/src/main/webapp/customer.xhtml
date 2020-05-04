@@ -12,76 +12,107 @@
 <h:body>
     <h:outputStylesheet library="css" name="style.css" />
     <h1>KUNDSIDA</h1>
-    <!--<h:graphicImage styleClass="alexander" library="Images" name="alexander.jpg"/> -->
-    <h:form>
+    <div>
+        <div class="search-block">
 
-        <h:outputText value="Sök vara: "/>
-        <h:inputText value = "#{customerController.searchInput}"/>
-        <h:commandButton value = "Sök" action = "#{customerController.findProduct(customerController.searchInput)}"/>
+            <h:form>
+                <br/>
+                <h:outputText value="Sök vara: "/>
+                <h:inputText value = "#{customerController.searchInput}"/>
+                <h:commandButton value = "Sök" action = "#{customerController.findProduct(customerController.searchInput)}"/>
+
+                <br/> <br/>
+                <!-- ************SEARCH*************-->
+                <h:outputLabel styleClass="product-title" value="#{customerController.getFoundProductName()}"/>
+                <br/> <br/>
+                <h:outputLabel styleClass="product-description" value="#{customerController.getFoundProductDesc()}" rendered="#{customerController.getRenderResult()}"/> <h:outputLabel value = " "/>
+                <h:commandButton value="Add" action="#{customerController.add(customerController.getFoundProductName())}" rendered="#{customerController.getRenderResult()}"/>
+
+                <br/>  <br/>
+            </h:form>
+        </div>
+
+        <!-- ************USER*************-->
+        <div class="logout-block">
+            <h:form>
+                <h:outputLabel value="#{loginAndRegisterController.currentUser.getUsername()}"/>
+                <br/>
+                <h:outputLabel value="#{loginAndRegisterController.currentUser.getRole()}"/>
+                <br/>
+                <h:commandButton value = "logout" action="index"/>
+            </h:form>
+        </div>
 
         <br/> <br/>
-        <!-- ************SEARCH*************-->
-        <h:outputLabel styleClass="product-title" value="#{customerController.getFoundProductName()}"/>
+        <hr/>
         <br/> <br/>
-        <h:outputLabel styleClass="product-description" value="#{customerController.getFoundProductDesc()}" rendered="#{customerController.getRenderResult()}"/> <h:outputLabel value = " "/>
-        <h:commandButton value="Add" action="#{customerController.add(customerController.getFoundProductName())}" rendered="#{customerController.getRenderResult()}"/>
 
-        <br/> <br/> <hr/> <br/>
+    </div>
+
+
         <!--************PRODUCTS************-->
-        <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(0).getName()}"/>
-        <br/> <br/>
-        <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(0).getDescription()}"/>
-        <br/> <br/>
-        <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(0).getName())}"/>
-        <br/> <br/> <br/>
 
-        <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(1).getName()}"/>
-        <br/> <br/>
-        <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(1).getDescription()}"/>
-        <br/> <br/>
-        <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(1).getName())}"/>
-        <br/> <br/> <br/>
+<!--        Test för att loopa ut produkter till sidan. Går bra att få ut produkter men inte att koppla köpknappen -->
+<!--        till en specifik vara-->
 
-        <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(2).getName()}"/>
-        <br/> <br/>
-        <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(2).getDescription()}"/>
-        <br/> <br/>
-        <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(2).getName())}"/>
+<!--        <ui:repeat value="#{customerController.getProductsList()}" var="product">-->
+<!--            <h:outputLabel styleClass="product-title" value="#{product.getName()}" />-->
+<!--            <br/> <br/>-->
+<!--            <h:outputLabel styleClass="product-description" value="#{product.getDescription()}"/>-->
+<!--            <br/> <br/>-->
+<!--            <h:commandButton value="Add" action="#{customerController.add(product.getName())}"/>-->
+<!--            <br/> <br/> <br/>-->
+<!--        </ui:repeat>-->
+<!--        <br/> <br/>-->
 
-        <br/> <br/>
-        <hr/>
-        <br/> <br/>
 
-        <!--************USER************-->
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getUsername()}"/>
-        <br/>
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getPassword()}"/>
-        <br/>
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getRole()}"/>
-        <br/>
+        <h:form>
+        <div class="product-block">
 
-        <br/> <br/>
-        <hr/>
-        <br/> <br/>
+            <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(0).getName()}"/>
+            <br/> <br/>
+            <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(0).getDescription()}"/>
+            <br/> <br/>
+            <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(0).getName())}"/>
+            <br/> <br/> <br/>
+
+            <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(1).getName()}"/>
+            <br/> <br/>
+            <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(1).getDescription()}"/>
+            <br/> <br/>
+            <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(1).getName())}"/>
+            <br/> <br/> <br/>
+
+            <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(2).getName()}"/>
+            <br/> <br/>
+            <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(2).getDescription()}"/>
+            <br/> <br/>
+            <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(2).getName())}"/>
+
+        </div>
 
         <!--*************CART************-->
-        <div>
+        <div class="cart-block">
             <h1>Your cart</h1>
             <h:dataTable styleClass="cart-tabell" value="#{customerController.cartList}" var="product">
                 <h:column styleClass="col-name">
-                    <h:outputText id="name" value="#{product.name}"></h:outputText>
+                    <h:outputText id="name" value="#{product.name}"/>
                 </h:column>
 
                 <h:column styleClass="col-price">
-                    <h:outputText id="pris" value="#{product.price} kr"></h:outputText>
+                    <h:outputText id="pris" value="#{product.price} kr"/>
                 </h:column>
             </h:dataTable>
             <br/>
             <h:outputLabel value="Total: #{customerController.getCartTotal(loginAndRegisterController.currentUser)} kr"/>
             <h:outputLabel value=" (Premium discount included!)" rendered="#{customerController.getRenderDiscountMsg()}"/>
             <br/>
-            <h:commandButton value = "köp" action="#{customerController.confirmOrder(loginAndRegisterController.currentUser)}"/>
+            <h:commandButton value = "Buy" action="#{customerController.confirmOrder(loginAndRegisterController.currentUser)}"/>
         </div>
     </h:form>
+
+    <br/> <br/>
+    <hr/>
+    <br/> <br/>
 </h:body>
 </html>

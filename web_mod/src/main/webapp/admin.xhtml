@@ -12,14 +12,40 @@
 <h:body>
     <h:outputStylesheet library="css" name="style.css" />
     <h1>ADMINSIDA</h1>
-    <br/>
-    <br/>
     <h:form>
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getUsername()}"/>
+        <h2> Användare </h2>
+        <h:dataTable styleClass="cart-tabell" value="#{adminController.getUsers()}" var="user">
+            <h:column>
+                <h:commandButton id="customer" value="#{user.username}" action="#{adminController.getUserInfo(user.username)}"/>
+            </h:column>
+        </h:dataTable>
+
         <br/>
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getPassword()}"/>
+        <h2> Användaruppgifter </h2>
+        <h:outputLabel value="Användarnamn:  #{adminController.getSelectedUserUsername()}"/>
+        <br/> <br/>
+        <h:outputLabel value="Lösenord: #{adminController.getSelectedUserPassword()}"/>
+        <br/> <br/>
+        <h:outputLabel value="Roll: #{adminController.getSelectedUserRole()}"/>
+
+        <br/> <br/>
+        <h2> Beställningar </h2>
+        <h:dataTable styleClass="cart-tabell" value="#{adminController.getOrders()}" var="orders" rendered="#{adminController.getRenderOrders()}">
+            <h:column>
+                <h:commandButton id="order" value="Beställning #{adminController.getOrderCounter()}" action ="#{adminController.setProducts(orders.getProductList())}"/>
+            </h:column>
+        </h:dataTable>
+
         <br/>
-        <h:outputLabel value="#{loginAndRegisterController.currentUser.getRole()}"/>
+        <h2> Betsällningsinnehåll </h2>
+        <h:dataTable styleClass="cart-tabell" value="#{adminController.getProducts()}" var="product" rendered="#{adminController.getRenderOrders()}">
+            <h:column>
+                <h:outputText value = "#{product.getName()}"/>
+            </h:column>
+            <h:column>
+                <h:outputText value = "#{product.getPrice()} kr"/>
+            </h:column>
+        </h:dataTable>
         <br/>
     </h:form>
 </h:body>

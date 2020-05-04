@@ -24,11 +24,11 @@ public class UserHandler implements UserHandlerLocal {
         Query query = em.createQuery("SELECT u FROM User u");
         int sizeOfUsersTable = query.getResultList().size();
         if (sizeOfUsersTable < 3) {
-            User user1 = new User("customer", "customer123", Role.CUSTOMER);
+            User user1 = new User("customer", "customer123", Role.CUSTOMER, 0);
             persist(user1);
-            User user2 = new User("premium", "premium123", Role.PREMIUM_CUSTOMER);
+            User user2 = new User("premium", "premium123", Role.PREMIUM_CUSTOMER, 500);
             persist(user2);
-            User user3 = new User("admin", "admin123", Role.ADMIN);
+            User user3 = new User("admin", "admin123", Role.ADMIN, 0);
             persist(user3);
         }
     }
@@ -84,7 +84,7 @@ public class UserHandler implements UserHandlerLocal {
             query.setParameter("userName", userName);
             resultFromDb = query.getResultList();
             if (resultFromDb.size() < 1) {
-                user = new User(userName, password, Role.CUSTOMER);
+                user = new User(userName, password, Role.CUSTOMER, 0);
                 persist(user);
                 userAdded = true;
             }
@@ -93,6 +93,30 @@ public class UserHandler implements UserHandlerLocal {
             e.printStackTrace();
         }
         return userAdded;
+    }
+
+
+
+
+    public void uppdateTotalAmountAndRole(String username, double orderTotal){
+        User user = new User();
+        try {
+            Query query = em.createQuery("SELECT u FROM User u WHERE u.username =:username");
+            query.setParameter("username", username);
+            user = (User) query.getSingleResult();
+            user.setTotalAmount(user.getTotalAmount()+orderTotal);
+
+            if(user.getRole() == Role.CUSTOMER && user.getTotalAmount() >= 500)
+                user.setRole(Role.PREMIUM_CUSTOMER);
+            em.merge(user);
+
+
+
+        } catch (NoResultException | NonUniqueResultException e) {
+            e.printStackTrace();
+        }
+        //bra att returnera status ifrån metoder istället för att bara göra dem till void
+
     }
 
 }

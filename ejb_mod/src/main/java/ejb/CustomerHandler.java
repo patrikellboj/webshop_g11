@@ -10,8 +10,6 @@ import java.util.logging.Logger;
 @Stateless
 //det blir deploy-fel om vi inte implementerar local eller remote interface:
 public class CustomerHandler implements CustomerHandlerLocal {
-//vi ska injicera EntityManager när vår app ligger på en app-server
-    //det är bästa sättet att initiera den då
 
     @PersistenceContext(unitName = "ManyToManyEJB-ejbPU")
     private EntityManager em;
@@ -32,13 +30,13 @@ public class CustomerHandler implements CustomerHandlerLocal {
         return products;
     }
 
-    public void registerNewOrder(User current, List <Product> confirmedList ){
-        Orders newOrder= new Orders(current, confirmedList);
-        //LoggHandler.logg(Level.INFO, newOrder.getUser().getUsername());                //det funkar
-        //LoggHandler.logg(Level.INFO, confirmedList.get(1).getName());                 //det funkar
-        //LoggHandler.logg(Level.INFO, newOrder.getProductList().get(1).getName());     //det funkar
+    @Override
+    public void registerNewOrder(User currentUser, List <Product> cartList ){
+        Orders newOrder= new Orders(currentUser, cartList);
+        persist(newOrder);
     }
 
+    @Override
     public double calculateTotal(User currentUser, List <Product> cartList ){
         double total = 0;
             for (Product product: cartList)

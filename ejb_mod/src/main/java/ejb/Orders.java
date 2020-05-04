@@ -6,35 +6,36 @@ import java.util.List;
 
 import static javax.persistence.CascadeType.PERSIST;
 
+@NamedQueries({
+        @NamedQuery(name = "findAllOrders", query = "SELECT o FROM Orders o")
+})
 
 @Entity
 @Table(name = "ORDERS")
-
-
 public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Basic(optional=false)
+    @Basic(optional = false)
     private long id;
-
-    @ManyToOne(cascade=PERSIST)
+    @ManyToOne
     private User user;
-    @ManyToMany(cascade=PERSIST,mappedBy="ordersList")
+    @JoinTable(name = "product_in_order",
+            joinColumns = @JoinColumn(name = "orders_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) //La till
     private List<Product> productList;
     //-------------------------------------
 
-    public Orders() {}
+    public Orders() {
+    }
 
     public Orders(User user, List<Product> productList) {
         this.user = user;
         this.productList = productList;
     }
-
-
-    //-------------------------------------
 
 
     public User getUser() {
@@ -49,10 +50,7 @@ public class Orders implements Serializable {
         return productList;
     }
 
-    public void setProductList(List<Product> products) {
+    public void setProductList(List<Product> productList) {
         this.productList = productList;
     }
-
-
-
 }

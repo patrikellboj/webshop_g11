@@ -16,6 +16,7 @@ import java.util.List;
 @SessionScoped
 public class LoginAndRegisterController implements Serializable {
 
+
     @EJB
     UserHandlerLocal userHandlerLocal;
     private String usernameInput;
@@ -61,8 +62,11 @@ public class LoginAndRegisterController implements Serializable {
        this.currentUser = userHandlerLocal.login(usernameInput,passwordInput); //varför inte userHandler?
        if (currentUser != null) {
            if (currentUser.getRole() == Role.ADMIN) {
+               this.message = "";
                return "admin";
+
            } else {
+               this.message = "";
                return "customer";
           }
        }
