@@ -17,18 +17,18 @@
     <br/>
     <h:form styleClass="form">
         <div class="user-password">
-        <h:outputLabel styleClass="username-label" value="User:"/>
+        <h:outputLabel styleClass="username-label" value="Användarnamn:"/>
         <h:inputText styleClass="username-value" value="#{loginAndRegisterController.usernameInput}"/>
         <br/>
         <!--        redisplay="true" måste användas om en styleklass används-->
-            <h:outputLabel styleClass="password-label" value="Password:"/>
+            <h:outputLabel styleClass="password-label" value="Lösenord:"/>
             <h:inputSecret styleClass="password-value" redisplay="true" value="#{loginAndRegisterController.passwordInput}"/>
         </div>
         <br/>
 
         <div class="index-buttons">
-            <h:commandButton styleClass="login-register-btn" action="#{loginAndRegisterController.login()}" value="Login"/>
-            <h:commandButton styleClass="login-register-btn" action="register" value="Register"/>
+            <h:commandButton styleClass="login-register-btn" action="#{loginAndRegisterController.login()}" value="Logga in"/>
+            <h:commandButton styleClass="login-register-btn" action="register" value="Registrera"/>
         </div>
         <br/>
 

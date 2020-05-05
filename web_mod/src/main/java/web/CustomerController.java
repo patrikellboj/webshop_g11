@@ -54,7 +54,7 @@ public class CustomerController implements Serializable {
         return total;
     }
 
-    public void add (String name) {
+    public String add (String name) {
         Product temp;
         for (int i = 0; i < getProductsList().size(); i++) {
             if (getProductsList().get(i).getName().equals(name)) {
@@ -63,6 +63,7 @@ public class CustomerController implements Serializable {
                 break;
             }
         }
+        return "customer?faces-redirect=true";
     }
 
     //Går till order sidan
