@@ -72,15 +72,18 @@ public class CustomerController implements Serializable {
 
     //Går till order sidan
     public String confirmOrder(User currentUser){
-        confirmedOrder.addAll(cartList);
-//        LoggHandler.logg(Level.INFO, currentUser.getUsername());
-//        LoggHandler.logg(Level.INFO, confirmedOrder.get(1).getName());
-        orderTotal = cartTotal;
-        customerHandlerLocal.registerNewOrder(currentUser, confirmedOrder);
-        userHandlerLocal.uppdateTotalAmountAndRole(currentUser.getUsername(), orderTotal);
-        cartList.clear(); //Tömmer varukorgen
-        return "order";
+        if (cartList.size()>0) {
+            confirmedOrder.addAll(cartList);
+            orderTotal = cartTotal;
+            customerHandlerLocal.registerNewOrder(currentUser, confirmedOrder);
+            userHandlerLocal.uppdateTotalAmountAndRole(currentUser.getUsername(), orderTotal);
+            cartList.clear(); //Tömmer varukorgen
+            return "order";
+        }
+        return "";
     }
+
+
 
     public void removeItem(Product p){
         for(int i = 0; i < cartList.size(); i++) {
