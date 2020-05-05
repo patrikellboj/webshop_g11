@@ -73,6 +73,7 @@ public class UserHandler implements UserHandlerLocal {
         return user;
     }
 
+
     @Override
     public boolean addNewUser(String userName, String password) {
         populateDBWithUsers();

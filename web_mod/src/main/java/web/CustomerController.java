@@ -159,4 +159,9 @@ public class CustomerController implements Serializable {
         this.cartTotal= calculateTotal(currentUser);
         return cartTotal;
     }
+
+    public String logout() {
+        cartList.clear();
+        return "index";
+    }
 }
