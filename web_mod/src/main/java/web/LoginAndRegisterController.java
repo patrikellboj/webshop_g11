@@ -70,7 +70,7 @@ public class LoginAndRegisterController implements Serializable {
                return "customer";
           }
        }
-        this.message= "User not found";
+        this.message= "Okänd användare";
         return "";
     }
 
@@ -82,9 +82,9 @@ public class LoginAndRegisterController implements Serializable {
     public String registerNewCustomer() {
         boolean userAdded = userHandlerLocal.addNewUser(usernameInput, passwordInput);
         if (userAdded) {
-            this.message = "User added successfully";
+            this.message = "La till användare";
         } else {
-            this.message = "User with username \"" + usernameInput + "\" already exists";
+            this.message = "Användaren \"" + usernameInput + "\" finns redan!";
         }
         return "index";
     }

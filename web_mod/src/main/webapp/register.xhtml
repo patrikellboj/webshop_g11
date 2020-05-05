@@ -17,27 +17,27 @@
             <div class="user-password">
             <h1>Register page</h1> <br/>
             <h:outputLabel for="firstName" styleClass="password-label">
-                <h:outputText value="First Name: "/>
+                <h:outputText value="Förnamn: "/>
             </h:outputLabel>
 
             <h:inputText id="firstName" value="" disabled="true" styleClass="password-value"/>
             <br/>
 
             <h:outputLabel for="lastName" styleClass="password-label">
-                <h:outputText value="Last name: "/>
+                <h:outputText value="Efternamn: "/>
             </h:outputLabel>
 
             <h:inputText id="lastName" value="" disabled="true" styleClass="password-value"/>
             <br/>
 
             <h:outputLabel for="username" styleClass="password-label">
-                <h:outputText value="Username: "/>
+                <h:outputText value="Användarnamn: "/>
             </h:outputLabel>
             <h:inputText id="username" value="#{loginAndRegisterController.usernameInput}" styleClass="password-value"/>
             <br/>
 
             <h:outputLabel  for="password" styleClass="password-label">
-                <h:outputText value="Password: "/>
+                <h:outputText value="Lösenord: "/>
             </h:outputLabel>
             <h:inputSecret id="password" redisplay="true" value="#{loginAndRegisterController.passwordInput}" styleClass="password-value"/>
             <br/>
@@ -49,7 +49,7 @@
             <br/><br/>
 
 
-            <h:commandButton action="#{loginAndRegisterController.registerNewCustomer()}" value="Register"/>
+            <h:commandButton action="#{loginAndRegisterController.registerNewCustomer()}" value="Registrera"/>
             </div>
     </h:form>
 </h:body>

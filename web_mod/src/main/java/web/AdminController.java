@@ -72,4 +72,14 @@ public class AdminController implements Serializable {
         orderCounter = 0;
         this.products = products;
     }
+
+    public String logout() {
+        selectedUserUsername = "";
+        selectedUserPassword = "";
+        selectedUserRole = null;
+        renderOrders = false;
+        getOrders().clear();
+        getProducts().clear();
+        return "index";
+    }
 }

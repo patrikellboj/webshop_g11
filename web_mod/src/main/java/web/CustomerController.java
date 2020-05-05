@@ -31,11 +31,6 @@ public class CustomerController implements Serializable {
     private double cartTotal;
     private double orderTotal;
 
-    //----------------------------------------------------------
-
-    //Referens till produktlistan
-
-
     public void findProduct(String name) {
         Product temp;
         for(int i = 0; i < getProductsList().size(); i++) {
@@ -82,8 +77,6 @@ public class CustomerController implements Serializable {
         }
         return "";
     }
-
-
 
     public void removeItem(Product p){
         for(int i = 0; i < cartList.size(); i++) {

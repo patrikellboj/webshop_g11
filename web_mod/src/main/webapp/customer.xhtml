@@ -26,7 +26,7 @@
                 <h:outputLabel styleClass="product-title" value="#{customerController.getFoundProductName()}"/>
                 <br/> <br/>
                 <h:outputLabel styleClass="product-description" value="#{customerController.getFoundProductDesc()}" rendered="#{customerController.getRenderResult()}"/> <h:outputLabel value = " "/>
-                <h:commandButton value="Add" action="#{customerController.add(customerController.getFoundProductName())}" rendered="#{customerController.getRenderResult()}"/>
+                <h:commandButton value="Lägg i kundvagn" action="#{customerController.add(customerController.getFoundProductName())}" rendered="#{customerController.getRenderResult()}"/>
 
                 <br/>  <br/>
             </h:form>
@@ -39,7 +39,7 @@
                 <br/>
                 <h:outputLabel value="#{loginAndRegisterController.currentUser.getRole()}"/>
                 <br/>
-                <h:commandButton value = "logout" action="#{customerController.logout()}"/>
+                <h:commandButton value = "Logga ut" action="#{customerController.logout()}"/>
             </h:form>
         </div>
 
@@ -73,27 +73,27 @@
             <br/> <br/>
             <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(0).getDescription()}"/>
             <br/> <br/>
-            <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(0).getName())}"/>
+            <h:commandButton value="Lägg i kundvagnen" action="#{customerController.add(customerController.getProductsList().get(0).getName())}"/>
             <br/> <br/> <br/>
 
             <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(1).getName()}"/>
             <br/> <br/>
             <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(1).getDescription()}"/>
             <br/> <br/>
-            <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(1).getName())}"/>
+            <h:commandButton value="Lägg i kundvagnen" action="#{customerController.add(customerController.getProductsList().get(1).getName())}"/>
             <br/> <br/> <br/>
 
             <h:outputLabel styleClass="product-title" value="#{customerController.getProductsList().get(2).getName()}"/>
             <br/> <br/>
             <h:outputLabel styleClass="product-description" value="#{customerController.getProductsList().get(2).getDescription()}"/>
             <br/> <br/>
-            <h:commandButton value="Add" action="#{customerController.add(customerController.getProductsList().get(2).getName())}"/>
+            <h:commandButton value="Lägg i kundvagnen" action="#{customerController.add(customerController.getProductsList().get(2).getName())}"/>
 
         </div>
 
         <!--*************CART************-->
         <div class="cart-block">
-            <h1>Your cart</h1>
+            <h1>Kundvagn</h1>
             <h:dataTable styleClass="cart-tabell" value="#{customerController.cartList}" var="product">
                 <h:column styleClass="col-name">
                     <h:outputText id="name" value="#{product.name}"/>
@@ -107,7 +107,7 @@
             </h:dataTable>
             <br/>
             <h:outputLabel value="Total: #{customerController.getCartTotal(loginAndRegisterController.currentUser)} kr"/>
-            <h:outputLabel value=" (Premium discount included!)" rendered="#{customerController.getRenderDiscountMsg()}"/>
+            <h:outputLabel value=" (Premium rabatt inkluderad!)" rendered="#{customerController.getRenderDiscountMsg()}"/>
             <br/>
             <h:commandButton value = "Köp" action="#{customerController.confirmOrder(loginAndRegisterController.currentUser)}"/>
             <h:commandButton value = "Töm varukorg" action="#{customerController.getCartList().clear()}"/>
