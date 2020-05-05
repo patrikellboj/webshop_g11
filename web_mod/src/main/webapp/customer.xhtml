@@ -35,9 +35,9 @@
         <!-- ************USER*************-->
         <div class="logout-block">
             <h:form>
-                <h:outputLabel value="#{loginAndRegisterController.currentUser.getUsername()}"/>
+                <h:outputLabel value="Användarnamn: #{loginAndRegisterController.currentUser.getUsername()}"/>
                 <br/>
-                <h:outputLabel value="#{loginAndRegisterController.currentUser.getRole()}"/>
+                <h:outputLabel value="Användarroll: #{loginAndRegisterController.currentUser.getRole()}"/>
                 <br/>
                 <h:commandButton value = "Logga ut" action="#{customerController.logout()}"/>
             </h:form>
