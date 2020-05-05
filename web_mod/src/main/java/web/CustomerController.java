@@ -34,7 +34,7 @@ public class CustomerController implements Serializable {
     public void findProduct(String name) {
         Product temp;
         for(int i = 0; i < getProductsList().size(); i++) {
-            if(getProductsList().get(i).getName().equals(name)) {
+            if(getProductsList().get(i).getName().equalsIgnoreCase(name)) {
                 temp = getProductsList().get(i);
                 foundProductName = temp.getName();
                 foundProductDesc = temp.getDescription();
