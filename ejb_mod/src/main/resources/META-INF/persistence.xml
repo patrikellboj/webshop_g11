@@ -6,6 +6,7 @@
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
 
+<!--        jdbc url jdbc:h2:mem:test;DB_CLOSE_DELAY=-1-->
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/customer"/>

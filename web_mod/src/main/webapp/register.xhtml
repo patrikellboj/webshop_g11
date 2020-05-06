@@ -12,6 +12,7 @@
 <h:body>
     <h:outputStylesheet library="css" name="style.css" />
 
+<!--    vid disabled="false" på inputfälten kastas ett fel eftersom value="" inte har något värde-->
 
         <h:form>
             <div class="user-password">
@@ -19,33 +20,49 @@
             <h:outputLabel for="firstName" styleClass="password-label">
                 <h:outputText value="Förnamn: "/>
             </h:outputLabel>
-
-            <h:inputText id="firstName" value="" disabled="true" styleClass="password-value"/>
+            <h:inputText id="firstName" value="" validatorMessage="Förnamn måste fyllas i" disabled="true" styleClass="password-value">
+                <f:validateRequired />
+            </h:inputText>
             <br/>
 
             <h:outputLabel for="lastName" styleClass="password-label">
                 <h:outputText value="Efternamn: "/>
             </h:outputLabel>
+            <h:inputText id="lastName" value="" validatorMessage="Efternamn måste fyllas i" disabled="true" styleClass="password-value">
+                <f:validateRequired />
+            </h:inputText>
+            <br/>
 
-            <h:inputText id="lastName" value="" disabled="true" styleClass="password-value"/>
+            <h:outputLabel for="address" styleClass="password-label">
+                <h:outputText value="Adress: "/>
+            </h:outputLabel>
+            <h:inputText id="address" value="" validatorMessage="Adress måste fyllas i" disabled="true" styleClass="password-value">
+                <f:validateRequired />
+            </h:inputText>
             <br/>
 
             <h:outputLabel for="username" styleClass="password-label">
                 <h:outputText value="Användarnamn: "/>
             </h:outputLabel>
-            <h:inputText id="username" value="#{loginAndRegisterController.usernameInput}" styleClass="password-value"/>
+            <h:inputText id="username" value="#{loginAndRegisterController.usernameInput}" validatorMessage="Användarnamn måste vara minst 4 tecken långt" styleClass="password-value">
+                <f:validateLength minimum="4"/>
+            </h:inputText>
             <br/>
 
             <h:outputLabel  for="password" styleClass="password-label">
                 <h:outputText value="Lösenord: "/>
             </h:outputLabel>
-            <h:inputSecret id="password" redisplay="true" value="#{loginAndRegisterController.passwordInput}" styleClass="password-value"/>
+            <h:inputSecret id="password" redisplay="true" value="#{loginAndRegisterController.passwordInput}" styleClass="password-value">
+                <f:validator validatorId="passwordValidator" />
+            </h:inputSecret>
             <br/>
 
             <h:outputLabel for="email" >
                 <h:outputText value="Email: " styleClass="password-label"/>
             </h:outputLabel>
-            <h:inputText id="email" value="" disabled="true" styleClass="password-value"/>
+            <h:inputText id="email" value="" validatorMessage="Email måste fyllas i" disabled="true" styleClass="password-value">
+                <f:validateRequired />
+            </h:inputText>
             <br/><br/>
 
 
