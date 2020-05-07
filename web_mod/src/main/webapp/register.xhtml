@@ -20,7 +20,7 @@
             <h:outputLabel for="firstName" styleClass="password-label">
                 <h:outputText value="Förnamn: "/>
             </h:outputLabel>
-            <h:inputText id="firstName" value="" validatorMessage="Förnamn måste fyllas i" disabled="true" styleClass="password-value">
+            <h:inputText id="firstName" value="#{loginAndRegisterController.firstNameInput}" validatorMessage="Förnamn måste fyllas i" disabled="false" styleClass="password-value">
                 <f:validateRequired />
             </h:inputText>
             <br/>
@@ -28,7 +28,7 @@
             <h:outputLabel for="lastName" styleClass="password-label">
                 <h:outputText value="Efternamn: "/>
             </h:outputLabel>
-            <h:inputText id="lastName" value="" validatorMessage="Efternamn måste fyllas i" disabled="true" styleClass="password-value">
+            <h:inputText id="lastName" value="#{loginAndRegisterController.lastNameInput}" validatorMessage="Efternamn måste fyllas i" disabled="false" styleClass="password-value">
                 <f:validateRequired />
             </h:inputText>
             <br/>
@@ -36,7 +36,7 @@
             <h:outputLabel for="address" styleClass="password-label">
                 <h:outputText value="Adress: "/>
             </h:outputLabel>
-            <h:inputText id="address" value="" validatorMessage="Adress måste fyllas i" disabled="true" styleClass="password-value">
+            <h:inputText id="address" value="#{loginAndRegisterController.addressInput}" validatorMessage="Adress måste fyllas i" disabled="false" styleClass="password-value">
                 <f:validateRequired />
             </h:inputText>
             <br/>
@@ -60,7 +60,7 @@
             <h:outputLabel for="email" >
                 <h:outputText value="Email: " styleClass="password-label"/>
             </h:outputLabel>
-            <h:inputText id="email" value="" validatorMessage="Email måste fyllas i" disabled="true" styleClass="password-value">
+            <h:inputText id="email" value="#{loginAndRegisterController.emailInput}" validatorMessage="Email måste fyllas i" disabled="false" styleClass="password-value">
                 <f:validateRequired />
             </h:inputText>
             <br/><br/>

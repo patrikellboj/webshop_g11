@@ -17,12 +17,20 @@ public class User implements Serializable {
     @Basic(optional=false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Column(name = "user_name", nullable = false) // Får inte vara null
+    @Column(name = "first_name", nullable = false) // 'nullable = false' = Får inte vara null.
+    private String firstName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+    @Column(name = "address", nullable = false)
+    private String address;
+    @Column(name = "user_name", nullable = false)
     private String username;
-    @Column(name = "password", nullable = false) // Får inte vara null
+    @Column(name = "password", nullable = false)
     private String password;
+    @Column(name = "email", nullable = false)
+    private String email;
     private Role role;
-    @Column(name = "totalAmount", nullable = false) // Får inte vara null
+    @Column(name = "totalAmount", nullable = false)
     private double totalAmount;
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy="user")
     private List<Orders> ordersList = new ArrayList<>();
@@ -32,13 +40,25 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String userName, String password, Role role, double totalAmount) {
-        this.username = userName;
+    public User(
+            String firstName,
+            String lastName,
+            String address,
+            String username,
+            String password,
+            String email,
+            Role role,
+            double totalAmount) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.address = address;
+        this.email = email;
+        this.username = username;
         this.password = password;
         this.role = role;
         this.totalAmount = totalAmount;
-
     }
+
 
     //-------------------------------------
 
@@ -82,4 +102,35 @@ public class User implements Serializable {
         this.totalAmount = totalAmount;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 }
