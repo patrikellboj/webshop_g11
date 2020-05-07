@@ -3,10 +3,6 @@ package ejb;
 import javax.ejb.Local;
 import java.util.List;
 
-/**
- *
- * @author eyvind
- */
 @Local
 public interface UserHandlerLocal {
 
