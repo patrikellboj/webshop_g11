@@ -96,7 +96,7 @@ public class LoginAndRegisterController implements Serializable {
     }
 
     public String login() {
-       this.currentUser = userHandlerLocal.login(usernameInput,passwordInput); //varför inte userHandler?
+       this.currentUser = userHandlerLocal.login(usernameInput,passwordInput);
        if (currentUser != null) {
            if (currentUser.getRole() == Role.ADMIN) {
                this.message = "";

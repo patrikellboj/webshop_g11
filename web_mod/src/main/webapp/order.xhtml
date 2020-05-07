@@ -29,7 +29,11 @@
             <h:outputLabel value="Summa: #{customerController.getOrderTotal()} kr"/>
             <h:outputLabel value=" (Premium discount included!)" rendered="#{customerController.getRenderDiscountMsg()}"/>
             <br/> <br/>
-            <h:commandButton value = "Tillbaka till shoppen!" action = "#{customerController.backToShop()}"/>
+
+            <h:commandButton value = "Tillbaka till shoppen!" action = "#{loginAndRegisterController.login()}">
+                <f:actionListener binding="#{customerController.clear()}"/>
+            </h:commandButton>
+
             <br/>
         </div>
     </h:form>
