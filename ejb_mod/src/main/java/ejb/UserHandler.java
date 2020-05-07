@@ -24,11 +24,11 @@ public class UserHandler implements UserHandlerLocal {
         Query query = em.createQuery("SELECT u FROM User u");
         int sizeOfUsersTable = query.getResultList().size();
         if (sizeOfUsersTable < 3) {
-            User user1 = new User("customer", "customer123", Role.CUSTOMER, 0);
+            User user1 = new User("Göran","Customersson","Customergatan 9","customer", "customer123", "goran@mail.com", Role.CUSTOMER, 0);
             persist(user1);
-            User user2 = new User("premium", "premium123", Role.PREMIUM_CUSTOMER, 500);
+            User user2 = new User("Fredrik","Premiumsson","Preiumvägen 7","premium", "premium123", "fredrik@mail.com", Role.PREMIUM_CUSTOMER, 500);
             persist(user2);
-            User user3 = new User("admin", "admin123", Role.ADMIN, 0);
+            User user3 = new User("Albert","Adminsson", "Adminvägen 67", "admin", "admin123", "admin@mail.com", Role.ADMIN, 0);
             persist(user3);
         }
     }
@@ -75,7 +75,13 @@ public class UserHandler implements UserHandlerLocal {
 
 
     @Override
-    public boolean addNewUser(String userName, String password) {
+    public boolean addNewUser(
+            String firstName,
+            String lastName,
+            String address,
+            String userName,
+            String password,
+            String email) {
         populateDBWithUsers();
         User user;
         List<User> resultFromDb = new ArrayList<>();
@@ -85,7 +91,7 @@ public class UserHandler implements UserHandlerLocal {
             query.setParameter("userName", userName);
             resultFromDb = query.getResultList();
             if (resultFromDb.size() < 1) {
-                user = new User(userName, password, Role.CUSTOMER, 0);
+                user = new User(firstName, lastName, address, userName, password, email, Role.CUSTOMER, 0);
                 persist(user);
                 userAdded = true;
             }

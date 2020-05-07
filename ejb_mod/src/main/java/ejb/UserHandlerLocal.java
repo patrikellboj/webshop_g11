@@ -3,14 +3,15 @@ package ejb;
 import javax.ejb.Local;
 import java.util.List;
 
-/**
- *
- * @author eyvind
- */
 @Local
 public interface UserHandlerLocal {
 
-    boolean addNewUser(String userName, String password);
+    boolean addNewUser(String firstName,
+                       String lastName,
+                       String address,
+                       String userName,
+                       String password,
+                       String email);
 
     User login(String userName, String password);
 

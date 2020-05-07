@@ -31,6 +31,7 @@ public class CustomerController implements Serializable {
     private double cartTotal;
     private double orderTotal;
 
+
     public void findProduct(String name) {
         Product temp;
         for(int i = 0; i < getProductsList().size(); i++) {
@@ -87,10 +88,19 @@ public class CustomerController implements Serializable {
         }
     }
 
-    public String backToShop() {
-        confirmedOrder.clear(); //Tömmer bekräftelse listan
-        return "customer";
+    public String logout() {
+        clear();
+        return "index";
     }
+
+    public void clear() {
+        cartList.clear();
+        searchInput = "";
+        foundProductName = "";
+        foundProductDesc = "";
+        confirmedOrder.clear();
+    }
+
 
     public List <Product> getProductsList(){
         return customerHandlerLocal.getProductsfromDb();
@@ -157,8 +167,5 @@ public class CustomerController implements Serializable {
         return cartTotal;
     }
 
-    public String logout() {
-        cartList.clear();
-        return "index";
-    }
+
 }
