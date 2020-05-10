@@ -22,10 +22,19 @@
 
         <br/>
         <h2> Användaruppgifter </h2>
+        <br/>
+        <h:outputLabel value="Namn:  #{adminController.getSelectedFirstName()}"/>
+        <br/>
+        <h:outputLabel value="Efternamn:  #{adminController.getSelectedLastName()}"/>
+        <br/>
+        <h:outputLabel value="Adress:  #{adminController.getSelectedAddress()}"/>
+        <br/>
         <h:outputLabel value="Användarnamn:  #{adminController.getSelectedUserUsername()}"/>
-        <br/> <br/>
+        <br/>
         <h:outputLabel value="Lösenord: #{adminController.getSelectedUserPassword()}"/>
-        <br/> <br/>
+        <br/>
+        <h:outputLabel value="E-mail:  #{adminController.getSelectedEmail()}"/>
+        <br/>
         <h:outputLabel value="Roll: #{adminController.getSelectedUserRole()}"/>
 
         <br/> <br/>
@@ -37,7 +46,7 @@
         </h:dataTable>
 
         <br/>
-        <h2> Betsällningsinnehåll </h2>
+        <h2> Beställningsinnehåll </h2>
         <h:dataTable styleClass="cart-tabell" value="#{adminController.getProducts()}" var="product" rendered="#{adminController.getRenderOrders()}">
             <h:column>
                 <h:outputText value = "#{product.getName()}"/>
